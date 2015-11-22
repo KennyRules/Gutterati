@@ -1,2 +1,2 @@
 # Gutterati
-C++ Data StructureLibrary, mainly for learning.
+C++ Data Structure Library, mainly for learning.
