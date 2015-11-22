@@ -1,0 +1,2 @@
+/home/majora/Workspace/Gutterati/bii/build/KennyRules_Gutterati/CMakeFiles/KennyRules_Gutterati_examples_LinkedListTest.dir
+/home/majora/Workspace/Gutterati/bii/build/CMakeFiles/biitest.dir

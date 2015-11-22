@@ -1,0 +1,61 @@
+language: cpp
+compiler:
+- gcc
+before_install:
+- export TRAVIS_COMMIT_MSG="$(git log --format=%B --no-merges -n 1)"
+- if [[ "$TRAVIS_COMMIT_MSG" = "$COMMIT_IGNORE_BUILD" ]]; then exit 0 ; fi
+- if [ "$CXX" == "g++" ]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test;
+  fi
+- sudo apt-get update -qq
+- git config --global user.email "$USER_EMAIL"
+- git config --global user.name "$USER_NAME"
+- git config --global push.default simple
+- git checkout $TRAVIS_BRANCH
+install:
+- if [ "$CXX" == "g++" ]; then sudo apt-get install -qq g++-4.8; fi
+- if [ "$CXX" == "g++" ]; then sudo update-alternatives --install /usr/bin/g++ g++
+  /usr/bin/g++-4.8 50; fi
+- wget http://www.biicode.com/downloads/latest/ubuntu64
+- mv ubuntu64 bii-ubuntu64.deb
+- sudo dpkg -i bii-ubuntu64.deb && sudo apt-get -f install
+- rm bii-ubuntu64.deb
+- wget https://s3.amazonaws.com/biibinaries/thirdparty/cmake-3.0.2-Linux-64.tar.gz
+- tar -xzf cmake-3.0.2-Linux-64.tar.gz
+- sudo cp -fR cmake-3.0.2-Linux-64/* /usr
+- rm -rf cmake-3.0.2-Linux-64
+- rm cmake-3.0.2-Linux-64.tar.gz
+- export TRAVIS_CXX=$CXX
+script:
+- cd /tmp
+- bii init -L
+- shopt -s dotglob && mv $TRAVIS_BUILD_DIR/* ./
+- if [ "$CXX" == "clang++" ]; then export CXX="clang++" && bii build; fi
+- if [ "$CXX" == "g++" ];     then export CXX="g++"     && bii build; fi
+##################### CHANGE WITH YOUR CUSTOM CHECKS OR TEST EXECUTION ##################
+- ls ./bin/lasote_docker_client_example_main
+#########################################################################################
+after_success:
+- bii user $USER -p $BII_PASSWORD
+- if [[ -n $TRAVIS_TAG ]]; then bii publish -r --tag STABLE --versiontag $TRAVIS_TAG
+  || echo "Ignored publish output..."; fi
+- if [[ -z $TRAVIS_TAG ]]; then bii publish -r || echo "Ignored publish output...";
+  fi
+# If there are changes, commit them
+- git config credential.helper "store --file=.git/credentials"
+- echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+- git add -A .
+- git commit -m "$COMMIT_IGNORE_BUILD"
+- git remote -v
+- git remote set-url origin https://github.com/$TRAVIS_REPO_SLUG.git
+- git push
+env:
+  global:
+  - USER_EMAIL=lasote@gmail.com
+  - USER_NAME="Luis Martinez de Bartolome"
+  - COMMIT_IGNORE_BUILD="Promoted version.***travis***"
+  - BLOCK_NAME=docker_client
+  - USER=lasote
+  # BII_PASSWORD: Biicode USER's password. > travis encrypt BII_PASSWORD=XXXXXX --add
+  - secure: ZHiaa26m5fD7iq5zSZhbwcltpGoAiRDWPiqcJFa/FspeU5YFKZ47RJ6jTn9mR+ZfPEOLLXgca5Urexc5Ck2uWqkm7XH/q+n7Ym+5upNAfUdISL8xvmeGvBzG5r3bhFsGFuNQ9T9Un1x8Kqx2VLFjyBYh2pwA1COQB42UHY7+n05+SotpDgW+NjHpLPoTDXtPf5Tu4nXU5WimPCvBS2JjVZix842s55/MdsZe5dCmy6BhzlG/7Sy7s4RPuYNcp9QNc+dTZO6IJtixEeE2hLdkSMwb5OLR2rKwYBwCRn47uA8FR9NMG8cNqnW8tZqx6B0ZmNJFLC4CasZvf+BxN27tVeyKhk4Kif9lHoHsTPth/vT9q9lOzq2P0Kn52NrYNStlIn0gFrxgJvUkhLE/CxuMfKTHzu35q1HEK7po2PfpUdHdKGocxWSpH7I5sWj1pnLL1LgTaJYI7Kd+D1FAqcqFTbp6Vu7FXqs1Vn3Z//rK7YSbu7NqkhnWD0uy08eAoZAXnFQ0LWFa5+lXYy8SUnb7CMyahj2Ve6qtQ4M7AvCqibRt9/HEZj6i5xm/vItFD1n9eodlNJes+w0FxYT5p8N93JTLG0HDVZ7vwaRLc4Zn7tvsoxdwbXbcH07FF3F8+D6rmug31vCgMqg7LRE7OmV5XaBVGCbQSKJMYnxbLVDkSnA=
+  # GH_TOKEN: Github token > travis encrypt GH_TOKEN=XXXXXX --add
+  - secure: qGtA6lfP3yBZr8NN60wgylR2dDMXJhZO0TLdm3P2vUVZKme1pgzIcxfofYshLfP49m9OwEU5kIc/maOTxEFnwenGzy46LXLtxHghe7ASe1gXbjIRMoN4VOV+6PfbQ/3+DJqkFigKRryuSeBe1rXbGxt0ESXPmYPqyO9xEf5Av7zQxKQGRYvF78XsXUL0z0rZDKlUAliCDdN8ZTgSNbwNPPdqeM9vBX6m8v6jYbs9miB3jqjpQsbhA8CCGiRVmWVHRe2F+kMmtjGzqKCABtH3NEHdPJnWgFwG+H6WBmuDhzO72+T88P+/dgRofc2RgjBru3TfddfI5TEtEprphnT9blYjaKyCYkeaxxheg8dqQKagzJwpiU7f2csCI7YibfggOO2OuwF2EWafdQg/DJozeV28zCOmofuLHJBLi6G8CajZD5XGHzMuLChA+lv49CB1W5skcJD5FvE8zFJHIHcPNgugZTeAEls38PyQla3czZIsdySbNo5t6LQts6HP3Vn92P7jGYa+zbhtLSfGe4/mySQJt0q5yLfZyUoosoosWuaOjOEluZW4KtQniWkbgw7uQBJkPJOxHX3vq5T+SVWwQ9DQ/ClZflU5ApcVtElfHTzvu2G4hm0pFWB+Wy5q4dWyjHbr67VS/UWvd5+CH76WxBCICfY1Mh910apCJSKmIS8=
