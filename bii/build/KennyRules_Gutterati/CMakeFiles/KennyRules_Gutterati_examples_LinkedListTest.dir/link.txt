@@ -1,1 +1,0 @@
-/usr/bin/c++       CMakeFiles/KennyRules_Gutterati_examples_LinkedListTest.dir/examples/LinkedListTest.cpp.o  -o ../../../bin/KennyRules_Gutterati_examples_LinkedListTest -rdynamic 

@@ -26,3 +26,7 @@
 *.exe
 *.out
 *.app
+
+# For Bii/Travis
+bii/
+bin/
