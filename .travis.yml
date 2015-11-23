@@ -34,7 +34,7 @@ script:
   - if [ "$CXX" == "clang++" ]; then export CXX="clang++" && bii build; fi
   - if [ "$CXX" == "g++" ];     then export CXX="g++"     && bii build; fi
 ##################### CHANGE WITH YOUR CUSTOM CHECKS OR TEST EXECUTION ##################
-  - ls ./bin/KennyRules_Gutterati_examples_LinkedListTest 
+  - ls ./bin/ 
 #########################################################################################
 after_success:
   - bii user $USER -p $BII_PASSWORD
