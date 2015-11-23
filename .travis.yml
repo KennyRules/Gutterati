@@ -33,13 +33,16 @@ script:
   - shopt -s dotglob && mv $TRAVIS_BUILD_DIR/* ./
   - if [ "$CXX" == "clang++" ]; then export CXX="clang++" && bii build; fi
   - if [ "$CXX" == "g++" ];     then export CXX="g++"     && bii build; fi
-- ls ./bin/KennyRules_Gutterati_examples_LinkedListTest 
+##################### CHANGE WITH YOUR CUSTOM CHECKS OR TEST EXECUTION ##################
+  - ls ./bin/KennyRules_Gutterati_examples_LinkedListTest 
+#########################################################################################
 after_success:
   - bii user $USER -p $BII_PASSWORD
   - if [[ -n $TRAVIS_TAG ]]; then bii publish -r --tag STABLE --versiontag $TRAVIS_TAG
     || echo "Ignored publish output..."; fi
   - if [[ -z $TRAVIS_TAG ]]; then bii publish -r || echo "Ignored publish output...";
     fi
+  # If there are changes, commit them
   - git config credential.helper "store --file=.git/credentials"
   - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
   - git add -A .
