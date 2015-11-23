@@ -16,7 +16,6 @@ install:
   - if [ "$CXX" == "g++" ]; then sudo apt-get install -qq g++-4.8; fi
   - if [ "$CXX" == "g++" ]; then sudo update-alternatives --install /usr/bin/g++ g++
     /usr/bin/g++-4.8 50; fi
-  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4"; fi
   - wget http://www.biicode.com/downloads/latest/ubuntu64
   - mv ubuntu64 bii-ubuntu64.deb
   - sudo dpkg -i bii-ubuntu64.deb && sudo apt-get -f install
@@ -34,7 +33,7 @@ script:
   - if [ "$CXX" == "clang++" ]; then export CXX="clang++" && bii build; fi
   - if [ "$CXX" == "g++" ];     then export CXX="g++"     && bii build; fi
 ##################### CHANGE WITH YOUR CUSTOM CHECKS OR TEST EXECUTION ##################
-  - ls ./bin/ 
+  - ls ./bin/KennyRules_Gutterati_examples_LinkedListTest 
 #########################################################################################
 after_success:
   - bii user $USER -p $BII_PASSWORD
