@@ -2,6 +2,12 @@ LIST(REMOVE_ITEM BII_BLOCK_EXES include_catch)
 
 ADD_BII_TARGETS()
 
+IF(APPLE)
+    TARGET_COMPILE_OPTIONS(${BII_BLOCK_TARGET} INTERFACE "-std=c++11")
+ELSEIF (WIN32 OR UNIX)
+    TARGET_COMPILE_OPTIONS(${BII_BLOCK_TARGET} INTERFACE "-std=c++11")
+ENDIF(APPLE)
+
 ###############################################################################
 #      HELP                                                                   #
 ###############################################################################
@@ -56,10 +62,4 @@ ADD_BII_TARGETS()
 #
 #    SET_TARGET_PROPERTIES(${BII_BLOCK_TARGET} PROPERTIES COMPILE_DEFINITIONS "IOV_MAX=255")
 #
-
-IF(APPLE)
-    TARGET_COMPILE_OPTIONS(${BII_BLOCK_TARGET} INTERFACE "-std=c++11 -stdlib=libc++")
-ELSEIF (WIN32 OR UNIX)
-    TARGET_COMPILE_OPTIONS(${BII_BLOCK_TARGET} INTERFACE "-std=c++11")
-ENDIF(APPLE)
 
