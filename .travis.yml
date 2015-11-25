@@ -32,8 +32,6 @@ install:
   - if [ "$CXX" == "clang++" ]; then cd /usr/lib && sudo ln -sf libc++.so.1.0 libc++.so; fi
   - if [ "$CXX" == "clang++" ]; then sudo ln -sf libc++.so.1.0 libc++.so.1 && cd $cwd; fi
 
-  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4"; fi
-
   - wget http://www.biicode.com/downloads/latest/ubuntu64
   - mv ubuntu64 bii-ubuntu64.deb
   - sudo dpkg -i bii-ubuntu64.deb && sudo apt-get -f install
@@ -48,7 +46,7 @@ script:
   - cd /tmp
   - bii init -L
   - shopt -s dotglob && mv $TRAVIS_BUILD_DIR/* ./
-  - if [ "$CXX" == "clang++" ]; then export CXX="clang++" && bii build; fi
+  - if [ "$CXX" == "clang++" ]; then export CXX="clang++-3.4" && bii build; fi
   - if [ "$CXX" == "g++" ];     then export CXX="g++"     && bii build; fi
 ##################### CHANGE WITH YOUR CUSTOM CHECKS OR TEST EXECUTION ##################
   - ls ./bin/KennyRules_Gutterati_examples_LinkedListTest 
