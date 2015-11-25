@@ -34,9 +34,7 @@ script:
   - shopt -s dotglob && mv $TRAVIS_BUILD_DIR/* ./
   - if [ "$CXX" == "clang++" ]; then export CXX="clang++" && bii build; fi
   - if [ "$CXX" == "g++" ];     then export CXX="g++"     && bii build; fi
-  - echo $CXX --version
-  - echo $CXX_FLAGS
-  - echo $CXXFLAGS
+  - echo `$CXX --version`
 ##################### CHANGE WITH YOUR CUSTOM CHECKS OR TEST EXECUTION ##################
   - ls ./bin/KennyRules_Gutterati_examples_LinkedListTest 
 #########################################################################################
