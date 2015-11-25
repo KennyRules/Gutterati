@@ -1,8 +1,7 @@
-#pragma once
 #define CATCH_CONFIG_RUNNER
 
 #include "../src/SingleLinkedList.h"
-#include "../include/catch.hpp"
+#include "../include/catch.h"
 
 TEST_CASE("SingleLinkedList - Adding elements.", "[SingleLinkedList]")
 {
