@@ -32,7 +32,8 @@ void SingleLinkedList::add(int aValue)
     Node* newNode = new Node{ aValue, nullptr };
     if (m_head == nullptr) {
         m_head = newNode;
-    } else {
+    } 
+    else {
         Node* cur = m_head;
         while (cur->next != nullptr)
             cur = cur->next;
@@ -58,8 +59,9 @@ void SingleLinkedList::remove(int aValue)
             delete cur;
             m_size--;
             return;
-        } 
+        }
         else {
+            prev = cur;
             cur = cur->next;
         }
     }
@@ -72,6 +74,7 @@ int SingleLinkedList::find(int aValue) const
         if (cur->data == aValue) {
             return aValue;
         }
+        cur = cur->next;
     }
     return -1;
 }
