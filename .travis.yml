@@ -28,6 +28,7 @@ install:
     /usr/bin/g++-4.8 50; fi
 
   - wget http://apt.biicode.com/install.sh && chmod +x install.sh && ./install.sh
+  - bii setup:cpp
   - export TRAVIS_CXX=$CXX
 script:
   - cd /tmp
