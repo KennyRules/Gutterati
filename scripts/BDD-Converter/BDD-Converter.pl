@@ -1,3 +1,13 @@
+# BDD-Converter.pl Version 1.0
+#
+# by Drew Diamantoukos
+#
+# Usage: `perl BDD-Converter.pl < name-of-bdd-file`
+# Output: A cpp file with the name as the-first-line-of-the-bdd-file.cpp
+#
+# To more rapidly generate Catch Unit Testing files using Behavior Driven Design syntax.
+# Uses a custom filetype, bdd, to allow a programmer to write a simple specification with the BDD syntax.
+
 use strict;
 use warnings;
 use String::Util qw(trim);
@@ -30,7 +40,9 @@ my %num_tabs = (
 	AND_THEN 	=> 3,
 );
 
-my $indent_level = -1;
+my $cur_indent_level = -1; 
+my $prev_indent_level = -1,
+my $brackets_remaining = 0;
 
 while(<STDIN>) {
 	my ($label, $description) = split /[\s]+/, trim($_), 2;
@@ -41,12 +53,27 @@ while(<STDIN>) {
 
 		chomp($description);
 
-		for (my $i=0; $i < $num_tabs{$label}; ++$i) {
-			print FILE "\t"
+		$prev_indent_level = $cur_indent_level;
+		$cur_indent_level = $num_tabs{$label};
+
+		# 
+		if ($prev_indent_level >= $cur_indent_level) {
+			my $indent_diff = $prev_indent_level - $cur_indent_level;
+			printTabs($prev_indent_level + 1);
+			print FILE "\n";
+			for (my $i = 0; $i <= $indent_diff; $i++) {
+				printTabs($prev_indent_level - $i);
+				print FILE "}\n";
+				$brackets_remaining--;
+			}
+		} 
+
+		if ($label ne "SCENARIO") {
+			print FILE "\n";
 		}
 
-		$indent_level = $num_tabs{$label};
-
+		printTabs($cur_indent_level);
+		
 		my $line_end = ") {\n";
 		if ($label eq "SCENARIO") {
 			my $tags;
@@ -57,12 +84,19 @@ while(<STDIN>) {
 		}
 
 		print FILE "$label( \"$description\"" . $line_end;
+		$brackets_remaining++;
 	}
 	else {
 		die "\nUnable to parse line: $_\n";
 	}
 }
 
+printTabs($cur_indent_level + 1);
+print FILE "\n";
+for (my $i = 0; $i < $brackets_remaining; $i++) {
+	printTabs($cur_indent_level - $i);
+	print FILE "}\n";
+}
 close FILE;
 
 unless(open FILE, '>>'.$filename) {
@@ -74,3 +108,9 @@ truncate(FILE, (stat $filename)[7] - 2);
 close FILE;
 
 print "Done!\n";
+
+sub printTabs {
+	for (my $i = 0; $i < $_[0]; ++$i) {
+		print FILE "\t";
+	}
+}
