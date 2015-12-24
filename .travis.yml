@@ -44,12 +44,6 @@ script:
   - cd ./bin/
   - for exe in ./* ; do ./"$exe" ; done
 #########################################################################################
-after_success:
-  - bii user $USER -p $BII_PASSWORD
-  - if [[ -n $TRAVIS_TAG ]]; then bii publish -r --tag STABLE --versiontag $TRAVIS_TAG
-    || echo "Ignored publish output..."; fi
-  - if [[ -z $TRAVIS_TAG ]]; then bii publish -r || echo "Ignored publish output...";
-    fi
 env:
   global:
   - USER_EMAIL=drewd@code-phoenix.com
@@ -69,4 +63,6 @@ deploy:
   provider: biicode
   user: KennyRules
   password:
-    secure: ZHiaa26m5fD7iq5zSZhbwcltpGoAiRDWPiqcJFa/FspeU5YFKZ47RJ6jTn9mR+ZfPEOLLXgca5Urexc5Ck2uWqkm7XH/q+n7Ym+5upNAfUdISL8xvmeGvBzG5r3bhFsGFuNQ9T9Un1x8Kqx2VLFjyBYh2pwA1COQB42UHY7+n05+SotpDgW+NjHpLPoTDXtPf5Tu4nXU5WimPCvBS2JjVZix842s55/MdsZe5dCmy6BhzlG/7Sy7s4RPuYNcp9QNc+dTZO6IJtixEeE2hLdkSMwb5OLR2rKwYBwCRn47uA8FR9NMG8cNqnW8tZqx6B0ZmNJFLC4CasZvf+BxN27tVeyKhk4Kif9lHoHsTPth/vT9q9lOzq2P0Kn52NrYNStlIn0gFrxgJvUkhLE/CxuMfKTHzu35q1HEK7po2PfpUdHdKGocxWSpH7I5sWj1pnLL1LgTaJYI7Kd+D1FAqcqFTbp6Vu7FXqs1Vn3Z//rK7YSbu7NqkhnWD0uy08eAoZAXnFQ0LWFa5+lXYy8SUnb7CMyahj2Ve6qtQ4M7AvCqibRt9/HEZj6i5xm/vItFD1n9eodlNJes+w0FxYT5p8N93JTLG0HDVZ7vwaRLc4Zn7tvsoxdwbXbcH07FF3F8+D6rmug31vCgMqg7LRE7OmV5XaBVGCbQSKJMYnxbLVDkSnA= # should be encrypted
+    secure: ZHiaa26m5fD7iq5zSZhbwcltpGoAiRDWPiqcJFa/FspeU5YFKZ47RJ6jTn9mR+ZfPEOLLXgca5Urexc5Ck2uWqkm7XH/q+n7Ym+5upNAfUdISL8xvmeGvBzG5r3bhFsGFuNQ9T9Un1x8Kqx2VLFjyBYh2pwA1COQB42UHY7+n05+SotpDgW+NjHpLPoTDXtPf5Tu4nXU5WimPCvBS2JjVZix842s55/MdsZe5dCmy6BhzlG/7Sy7s4RPuYNcp9QNc+dTZO6IJtixEeE2hLdkSMwb5OLR2rKwYBwCRn47uA8FR9NMG8cNqnW8tZqx6B0ZmNJFLC4CasZvf+BxN27tVeyKhk4Kif9lHoHsTPth/vT9q9lOzq2P0Kn52NrYNStlIn0gFrxgJvUkhLE/CxuMfKTHzu35q1HEK7po2PfpUdHdKGocxWSpH7I5sWj1pnLL1LgTaJYI7Kd+D1FAqcqFTbp6Vu7FXqs1Vn3Z//rK7YSbu7NqkhnWD0uy08eAoZAXnFQ0LWFa5+lXYy8SUnb7CMyahj2Ve6qtQ4M7AvCqibRt9/HEZj6i5xm/vItFD1n9eodlNJes+w0FxYT5p8N93JTLG0HDVZ7vwaRLc4Zn7tvsoxdwbXbcH07FF3F8+D6rmug31vCgMqg7LRE7OmV5XaBVGCbQSKJMYnxbLVDkSnA=
+  on:
+    repo: $USER/$BLOCK_NAME
