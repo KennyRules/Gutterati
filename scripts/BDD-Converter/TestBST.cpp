@@ -1,3 +1,9 @@
+#include "catch.hpp"
+
+// --------------------------------------------------------------------------
+// ---- Auto-generated BDD-Style Catch class genered by BDD-Converter.pl ----
+// --------------------------------------------------------------------------
+
 SCENARIO( "A Binary Tree can have items added and removed", "[BST]") {
 
 	GIVEN( "A empty tree") {

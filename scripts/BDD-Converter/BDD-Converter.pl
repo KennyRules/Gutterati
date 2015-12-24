@@ -1,4 +1,4 @@
-# BDD-Converter.pl Version 1.0
+# BDD-Converter.pl Version 1.1
 #
 # by Drew Diamantoukos
 #
@@ -28,8 +28,12 @@ $filename = $filename . ".cpp";
 printf "Creating new file '%s'\n", $filename;
 
 unless(open FILE, '>'.$filename) {
-	die "\nUnable to create $filename\n";
+	die "\nUnable to create $filename\n\n";
 }
+
+print FILE "#include \"catch.hpp\"\n";
+
+printHeader();
 
 my %num_tabs = (
 	SCENARIO 	=> 0,
@@ -56,7 +60,8 @@ while(<STDIN>) {
 		$prev_indent_level = $cur_indent_level;
 		$cur_indent_level = $num_tabs{$label};
 
-		# 
+		# This will close brackets if we are moving either to a same-level label, 
+		# or a label that is "above" the previous label.
 		if ($prev_indent_level >= $cur_indent_level) {
 			my $indent_diff = $prev_indent_level - $cur_indent_level;
 			printTabs($prev_indent_level + 1);
@@ -113,4 +118,12 @@ sub printTabs {
 	for (my $i = 0; $i < $_[0]; ++$i) {
 		print FILE "\t";
 	}
+}
+
+sub printHeader {
+	print FILE "\n";
+	print FILE "// --------------------------------------------------------------------------\n";
+	print FILE "// ---- Auto-generated BDD-Style Catch class genered by BDD-Converter.pl ----\n";
+	print FILE "// --------------------------------------------------------------------------\n";
+	print FILE "\n";
 }

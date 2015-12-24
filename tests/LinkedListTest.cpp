@@ -1,8 +1,5 @@
-#define CATCH_CONFIG_RUNNER
-
 #include "../src/SingleLinkedList.h"
 #include "../include/catch.hpp"
-
 
 SCENARIO("A Singly Linked List can have items added and removed from it", "[SingleLinkedList]")
 {
@@ -108,10 +105,3 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
         }
     }
 };
-
-int main(int argc, char* const argv[])
-{
-    int result = Catch::Session().run(argc, argv);
-
-    return result;
-}
