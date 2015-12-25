@@ -14,3 +14,5 @@ To (currently) quickly get up and running, after installing biicode from the abo
 5. Run 'bii build' to verify everything is setup.
 
 To get Visual Studio 2015 setup, run 'bii configure -G "Visual Studio 14' in the Gutterati directory. You may need to update your CMake version. If you are using a different version, then substituting 14 with the correct version number should suffice.
+
+Please see the [FAQ](docs/faq.md) for more info.
