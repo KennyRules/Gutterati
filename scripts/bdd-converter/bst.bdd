@@ -1,4 +1,4 @@
-TestBST
+TestBst
 SCENARIO A Binary Tree can have items added and removed [BST]
 GIVEN A empty tree
 WHEN items are added
