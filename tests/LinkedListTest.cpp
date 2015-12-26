@@ -1,6 +1,6 @@
 /** 
- *  @file I'M A FIRIN MAH LAZOR
- *  @brief Central hub for running Catch tests.
+ *  @file 
+ *  @brief Exercise a Singly Linked List
  *  TO-DO: Further define 
  **/
 
