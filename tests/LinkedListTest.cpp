@@ -1,3 +1,9 @@
+/** 
+ *  @file I'M A FIRIN MAH LAZOR
+ *  @brief Central hub for running Catch tests.
+ *  TO-DO: Further define 
+ **/
+
 #include "../src/SingleLinkedList.h"
 #include "../include/catch.hpp"
 
