@@ -164,6 +164,7 @@ install:
       brew install caskroom/cask/brew-cask
       brew cask install biicode
     fi
+    bii setup:cpp
 
 before_script:
   - export CXX=${COMPILER}
