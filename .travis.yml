@@ -38,11 +38,7 @@ script:
   - if [ "$CXX" == "g++" ];     then export CXX="g++"     && bii build; fi
   - echo `$CXX --version`
 ##################### CHANGE WITH YOUR CUSTOM CHECKS OR TEST EXECUTION ##################
-  - echo "Output in bin folder:"
-  - ls ./bin/
-  - echo "Running Tests:"
-  - cd ./bin/
-  - for exe in ./* ; do ./"$exe" ; done
+  - bii test
 #########################################################################################
 env:
   global:
