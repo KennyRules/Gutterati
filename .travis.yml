@@ -147,10 +147,14 @@ matrix:
       osx_image: xcode7
       compiler: clang
       env: COMPILER='ccache clang++' BUILD_TYPE='Release'
+
+before_install:
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; 
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo ln -s -v -f $(which gcc-$GCC_VERSION) /usr/bin/gcc; fi
+
 install:
   - wget http://apt.biicode.com/install.sh && chmod +x install.sh && ./install.sh
   - bii setup:cpp
-  - export TRAVIS_CXX=$CXX
 
   # This section taken from https://github.com/philsquared/Catch
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
@@ -164,6 +168,11 @@ install:
       brew install cmake ccache
     fi
 
+before_script:
+  - export CXX=${COMPILER}
+  - export TRAVIS_CXX=$CXX
+  - cd ${TRAVIS_BUILD_DIR}
+
 script:
 ##################### CHANGE WITH YOUR CUSTOM CHECKS OR TEST EXECUTION ##################
   - bii init -L
@@ -171,6 +180,7 @@ script:
   - bii build
   - bii test
 #########################################################################################
+
 notifications:
   email: false
   slack:
