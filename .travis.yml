@@ -1,4 +1,5 @@
 language: cpp
+sudo: true
 
 # ccache usage taken from https://github.com/philsquared/Catc
 cache:
