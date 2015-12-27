@@ -155,7 +155,11 @@ before_install:
   - git config --global push.default simple
   - git checkout $TRAVIS_BRANCH
 install:
-  # This first section taken from https://github.com/philsquared/Catch
+  - wget http://apt.biicode.com/install.sh && chmod +x install.sh && ./install.sh
+  - bii setup:cpp
+  - export TRAVIS_CXX=$CXX
+
+  # This section taken from https://github.com/philsquared/Catch
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
   - |
@@ -167,9 +171,6 @@ install:
       brew install cmake ccache
     fi
 
-  - wget http://apt.biicode.com/install.sh && chmod +x install.sh && ./install.sh
-  - bii setup:cpp
-  - export TRAVIS_CXX=$CXX
 script:
   - cd /tmp
   - bii init -L
