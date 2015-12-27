@@ -148,10 +148,6 @@ matrix:
       compiler: clang
       env: COMPILER='ccache clang++' BUILD_TYPE='Release'
 
-before_install:
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; 
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo ln -s -v -f $(which gcc-$GCC_VERSION) /usr/bin/gcc; fi
-
 install:
   - wget http://apt.biicode.com/install.sh && chmod +x install.sh && ./install.sh
   - bii setup:cpp
