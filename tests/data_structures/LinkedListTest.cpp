@@ -5,8 +5,8 @@
  *  TO-DO: Further define 
  **/
 
-#include "../src/SingleLinkedList.h"
-#include "../include/catch.hpp"
+#include "../../src/SingleLinkedList.h"
+#include "../../include/catch.hpp"
 
 SCENARIO("A Singly Linked List can have items added and removed from it", "[SingleLinkedList]")
 {
