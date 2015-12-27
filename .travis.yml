@@ -159,12 +159,11 @@ install:
       mkdir cmake && travis_retry wget --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-      brew install cmake ccache biicode
+      brew install cmake ccache
       xcode-select --install
       brew install caskroom/cask/brew-cask
       brew cask install biicode
     fi
-  - bii setup:cpp
 
 before_script:
   - export CXX=${COMPILER}
