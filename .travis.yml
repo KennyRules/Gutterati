@@ -166,6 +166,7 @@ install:
 
 script:
 ##################### CHANGE WITH YOUR CUSTOM CHECKS OR TEST EXECUTION ##################
+  - bii init -L
   - bii configure
   - bii build
   - bii test
