@@ -149,20 +149,22 @@ matrix:
       env: COMPILER='ccache clang++' BUILD_TYPE='Release'
 
 install:
-  - wget http://apt.biicode.com/install.sh && chmod +x install.sh && ./install.sh
-  - bii setup:cpp
-
   # This section taken from https://github.com/philsquared/Catch
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
+      wget http://apt.biicode.com/install.sh && chmod +x install.sh && ./install.sh
       CMAKE_URL="http://www.cmake.org/files/v3.3/cmake-3.3.2-Linux-x86_64.tar.gz"
       mkdir cmake && travis_retry wget --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-      brew install cmake ccache
+      brew install cmake ccache biicode
+      xcode-select --install
+      brew install caskroom/cask/brew-cask
+      brew cask install biicode
     fi
+  - bii setup:cpp
 
 before_script:
   - export CXX=${COMPILER}
