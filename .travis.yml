@@ -1,7 +1,6 @@
 language: cpp
 sudo: true
 
-# ccache usage taken from https://github.com/philsquared/Catc
 cache:
   ccache: true
   directories:
@@ -14,21 +13,30 @@ env:
   - COMMIT_IGNORE_BUILD="Promoted version.***travis***"
   - BLOCK_NAME=Gutterati
   - USER=KennyRules
-  # BII_PASSWORD: Biicode USER's password. > travis encrypt BII_PASSWORD=XXXXXX --add
-  - secure: ZHiaa26m5fD7iq5zSZhbwcltpGoAiRDWPiqcJFa/FspeU5YFKZ47RJ6jTn9mR+ZfPEOLLXgca5Urexc5Ck2uWqkm7XH/q+n7Ym+5upNAfUdISL8xvmeGvBzG5r3bhFsGFuNQ9T9Un1x8Kqx2VLFjyBYh2pwA1COQB42UHY7+n05+SotpDgW+NjHpLPoTDXtPf5Tu4nXU5WimPCvBS2JjVZix842s55/MdsZe5dCmy6BhzlG/7Sy7s4RPuYNcp9QNc+dTZO6IJtixEeE2hLdkSMwb5OLR2rKwYBwCRn47uA8FR9NMG8cNqnW8tZqx6B0ZmNJFLC4CasZvf+BxN27tVeyKhk4Kif9lHoHsTPth/vT9q9lOzq2P0Kn52NrYNStlIn0gFrxgJvUkhLE/CxuMfKTHzu35q1HEK7po2PfpUdHdKGocxWSpH7I5sWj1pnLL1LgTaJYI7Kd+D1FAqcqFTbp6Vu7FXqs1Vn3Z//rK7YSbu7NqkhnWD0uy08eAoZAXnFQ0LWFa5+lXYy8SUnb7CMyahj2Ve6qtQ4M7AvCqibRt9/HEZj6i5xm/vItFD1n9eodlNJes+w0FxYT5p8N93JTLG0HDVZ7vwaRLc4Zn7tvsoxdwbXbcH07FF3F8+D6rmug31vCgMqg7LRE7OmV5XaBVGCbQSKJMYnxbLVDkSnA=
-  # GH_TOKEN: Github token > travis encrypt GH_TOKEN=XXXXXX --add
-  - secure: qGtA6lfP3yBZr8NN60wgylR2dDMXJhZO0TLdm3P2vUVZKme1pgzIcxfofYshLfP49m9OwEU5kIc/maOTxEFnwenGzy46LXLtxHghe7ASe1gXbjIRMoN4VOV+6PfbQ/3+DJqkFigKRryuSeBe1rXbGxt0ESXPmYPqyO9xEf5Av7zQxKQGRYvF78XsXUL0z0rZDKlUAliCDdN8ZTgSNbwNPPdqeM9vBX6m8v6jYbs9miB3jqjpQsbhA8CCGiRVmWVHRe2F+kMmtjGzqKCABtH3NEHdPJnWgFwG+H6WBmuDhzO72+T88P+/dgRofc2RgjBru3TfddfI5TEtEprphnT9blYjaKyCYkeaxxheg8dqQKagzJwpiU7f2csCI7YibfggOO2OuwF2EWafdQg/DJozeV28zCOmofuLHJBLi6G8CajZD5XGHzMuLChA+lv49CB1W5skcJD5FvE8zFJHIHcPNgugZTeAEls38PyQla3czZIsdySbNo5t6LQts6HP3Vn92P7jGYa+zbhtLSfGe4/mySQJt0q5yLfZyUoosoosWuaOjOEluZW4KtQniWkbgw7uQBJkPJOxHX3vq5T+SVWwQ9DQ/ClZflU5ApcVtElfHTzvu2G4hm0pFWB+Wy5q4dWyjHbr67VS/UWvd5+CH76WxBCICfY1Mh910apCJSKmIS8=
   - USE_CCACHE=1
   - CCACHE_COMPRESS=1
   - CCACHE_MAXSIZE=200M
   - CCACHE_CPP2=1
 
+notifications:
+  email: false
+  slack:
+    secure: eWomj3OJ9UtPP4/jGYQ2o+vbRQMpZmY2Tug+Og+17W73A+ldCmxNeYmHXKP++pEvhaeOaI8qBbmq8PBvbv3YZS4Uj3TGwOjZPJemFFVYoOHrcRjiybTlLrJDXeUHEfKgNuNs5Z/R8FvP03VDkVHlwJwxNRfUcIc0yUS0HTAE9dAt51FWRW1e64epzxy5XaChAOBplerjV7Nd3R8sdeAN8NOsOIbBxJBY30sFLb2mzDFsLl61Ah35HfgDLN5+mM4CUG6QhZTwFFDF+oyDvqSslwx+3FOLQ43XB98fDyRjzzgFWyIsktNmDpNu96wsyguD1fetfZAFRnqci5TCNHXWv4OGAOCRX4TnJVMBoPY4HACIQ06ww+V5B2UpWD0fMmW7P8lIP+WBpYDoyf2VrOZ9LLBzHOKo8zkCZ7JIbMWS9wew4IYtjNTxZ4jBAfdAwJlKgb0OPLpUPT7h5P71dQncrvarQTRMSvbqnJN6hwOtHtRsBYHhPPs2SVqIY9CUdbgV4xI78l9Cy/4os2o7opO9sf5S0vHp3PvgFNW+66QOxBSBANKNVSgGwBr8KKcDDPPZ9umh9jDfaKpuca/g8QMVTIwQ602tOOkH1mwjP0llBaqtF1rij1DmgrcQL6imufWtAQgv/XMaLZfVBnjii0s9lraBdJKtaB4/Sn6uefX354Y=
+
+deploy:
+  provider: biicode
+  user: KennyRules
+  password:
+     secure: "bSu+Mz/2m4TkRp6AIIzmWSb6GMEzym3TZHQ6ZeUzsPODX8Mzi/95lde8HJQn5cTPr3JHN/yPhY6xU1Je5fs9i3drAxDzs35IG02mfD7JBiNakfMZmNCMZlWWwvlVrcH2SL/wrhEMsv+eIgJfIQ89RoPsam61/MhldA7JFzSkXDTV7H7FEKj0h9Pm2vMw599ereOQx1NFitXRVz6f3pvZspA7f3H5DZXmXDrEGhtRjXriIYS9+Aup3PWOw6ZpvQwLnBEKXA/Ozk9VfwG6Y9nqQiWZj+vCltFynxuE/t/MvXOVSpfht7PEka+RvPRFvaQwFf9Vnc9lcgNnTy61yEmDuJTEENA/WH+nPw1aHItddc4m96cTgT6WnEfnWVAAFxTioikHC09lT7u5YNz7CddILqbhVrbfsZoGdRz02d8tPXQuwSk/R8t/yq09UQJur3vbNYFOkGc4uIwAc7jvnvMYvoNbMccmG59ZmE01bTUIZsWefUVbaJWhJUv7TzHE7VbWzV02iDk+T5cgIqfE0LOGhDTcBUEQWUQZwNt/XxehGcY1/ZRNzNxOzm0THji93fDKRbfvIVbixH7+FbwQh7yC+rgd0nWm+NqNzmptoooGPGCbGf6G/1xYW31/+l9Yq70meYSh3PCo3FI0GT4DVVHwFtwYxDlS2LbxRVATv4XHJRM="
+  on:
+    branch: master
+    repo: $USER/$BLOCK_NAME
+
 matrix:
   allow_failures:
     - os: osx
-  include:
 
-    # 1/ Linux Clang Builds - Taken from https://github.com/philsquared/Catch
+  include:
     - os: linux
       compiler: clang
       addons: &clang35
@@ -37,11 +45,10 @@ matrix:
           packages: ['clang-3.5']
       env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Release'
 
-    - os: linux
-      compiler: clang
-      addons: *clang35
-      env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Debug'
-
+    #- os: linux
+    #  compiler: clang
+    #  addons: *clang35
+    #  env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Debug'
 
     - os: linux
       compiler: clang
@@ -51,10 +58,10 @@ matrix:
           packages: ['clang-3.6']
       env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Release'
 
-    - os: linux
-      compiler: clang
-      addons: *clang36
-      env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Debug'
+    #- os: linux
+    #  compiler: clang
+    #  addons: *clang36
+    #  env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Debug'
 
 
     - os: linux
@@ -65,10 +72,10 @@ matrix:
           packages: ['clang-3.7']
       env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Release'
 
-    - os: linux
-      compiler: clang
-      addons: *clang37
-      env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Debug'
+    #- os: linux
+    #  compiler: clang
+    #  addons: *clang37
+    #  env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Debug'
 
 
     - os: linux
@@ -79,13 +86,11 @@ matrix:
           packages: ['clang-3.8']
       env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Release'
 
-    - os: linux
-      compiler: clang
-      addons: *clang38
-      env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Debug'
+    #- os: linux
+    #  compiler: clang
+    #  addons: *clang38
+    #  env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Debug'
 
-
-    # 2/ Linux GCC Builds - Taken from https://github.com/philsquared/Catch
     - os: linux
       compiler: gcc
       addons: &gcc48
@@ -94,11 +99,10 @@ matrix:
          packages: ['g++-4.8']
       env: COMPILER='ccache g++-4.8' BUILD_TYPE='Release'
 
-    - os: linux
-      compiler: gcc
-      addons: *gcc48
-      env: COMPILER='ccache g++-4.8' BUILD_TYPE='Debug'
-
+    #- os: linux
+    #  compiler: gcc
+    #  addons: *gcc48
+    #  env: COMPILER='ccache g++-4.8' BUILD_TYPE='Debug'
 
     - os: linux
       compiler: gcc
@@ -108,11 +112,10 @@ matrix:
           packages: ['g++-4.9']
       env: COMPILER='ccache g++-4.9' BUILD_TYPE='Release'
 
-    - os: linux
-      compiler: gcc
-      addons: *gcc49
-      env: COMPILER='ccache g++-4.9' BUILD_TYPE='Debug'
-
+    #- os: linux
+    #  compiler: gcc
+    #  addons: *gcc49
+    #  env: COMPILER='ccache g++-4.9' BUILD_TYPE='Debug'
 
     - os: linux
       compiler: gcc
@@ -122,85 +125,90 @@ matrix:
           packages: ['g++-5']
       env: COMPILER='ccache g++-5' BUILD_TYPE='Release'
 
-    - os: linux
-      compiler: gcc
-      addons: *gcc5
-      env: COMPILER='ccache g++-5' BUILD_TYPE='Debug'
-
-
-    # 3/ OSX Clang Builds - Taken from https://github.com/philsquared/Catch
-    - os: osx
-      osx_image: xcode7.2
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
+    #- os: linux
+    #  compiler: gcc
+    #  addons: *gcc5
+    #  env: COMPILER='ccache g++-5' BUILD_TYPE='Debug'
 
     - os: osx
       osx_image: xcode7.2
       compiler: clang
       env: COMPILER='ccache clang++' BUILD_TYPE='Release'
 
-
-    - os: osx
-      osx_image: xcode7.1
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
+    #- os: osx
+    #  osx_image: xcode7.2
+    #  compiler: clang
+    #  env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
 
     - os: osx
       osx_image: xcode7.1
       compiler: clang
       env: COMPILER='ccache clang++' BUILD_TYPE='Release'
 
+    #- os: osx
+    #  osx_image: xcode7.1
+    #  compiler: clang
+    #  env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
+
     - os: osx
-      osx_image: xcode6.4
+      osx_image: xcode7
       compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
+      env: COMPILER='ccache clang++' BUILD_TYPE='Release'
+
+    #- os: osx
+    #  osx_image: xcode7
+    #  compiler: clang
+    #  env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
 
     - os: osx
       osx_image: xcode6.4
       compiler: clang
       env: COMPILER='ccache clang++' BUILD_TYPE='Release'
+
+    #- os: osx
+    #  osx_image: xcode6.4
+    #  compiler: clang
+    #  env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
 
 install:
   # This section taken from https://github.com/philsquared/Catch
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
+
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
       wget http://apt.biicode.com/install.sh && chmod +x install.sh && ./install.sh
       CMAKE_URL="http://www.cmake.org/files/v3.3/cmake-3.3.2-Linux-x86_64.tar.gz"
       mkdir cmake && travis_retry wget --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
+      bii setup:cpp
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-      brew install cmake ccache
-      xcode-select --install
-      brew install caskroom/cask/brew-cask
-      brew cask install biicode
+      brew update
+      brew install cmake
+      brew install ccache
+      brew outdated cmake --verbose || brew upgrade cmake
+      cd ${TRAVIS_BUILD_DIR}/../
+      brew install python
+      git clone https://github.com/biicode/biicode.git
+      BII_ABS_PATH="${TRAVIS_BUILD_DIR}/../biicode"
+      cd ${BII_ABS_PATH}
+      git submodule update --init --recursive
+      pip install -r client/requirements.txt
+      pip install -r common/requirements.txt
+      export PATH=$BII_ABS_PATH:$PATH
+      cmake --version
     fi
-    bii setup:cpp
+    cd ${TRAVIS_BUILD_DIR}
+    cmake --version
 
 before_script:
   - export CXX=${COMPILER}
   - export TRAVIS_CXX=$CXX
   - cd ${TRAVIS_BUILD_DIR}
-  - echo `cmake --version`
 
 script:
 ##################### CHANGE WITH YOUR CUSTOM CHECKS OR TEST EXECUTION ##################
   - bii init -L
-  - bii configure
-  - bii build
-  - bii test
+  - travis_wait 1 bii configure || true # Recommend fix for weird bii build behavior on osx.
+  - bii build ; bii test
 #########################################################################################
-
-notifications:
-  email: false
-  slack:
-    secure: eWomj3OJ9UtPP4/jGYQ2o+vbRQMpZmY2Tug+Og+17W73A+ldCmxNeYmHXKP++pEvhaeOaI8qBbmq8PBvbv3YZS4Uj3TGwOjZPJemFFVYoOHrcRjiybTlLrJDXeUHEfKgNuNs5Z/R8FvP03VDkVHlwJwxNRfUcIc0yUS0HTAE9dAt51FWRW1e64epzxy5XaChAOBplerjV7Nd3R8sdeAN8NOsOIbBxJBY30sFLb2mzDFsLl61Ah35HfgDLN5+mM4CUG6QhZTwFFDF+oyDvqSslwx+3FOLQ43XB98fDyRjzzgFWyIsktNmDpNu96wsyguD1fetfZAFRnqci5TCNHXWv4OGAOCRX4TnJVMBoPY4HACIQ06ww+V5B2UpWD0fMmW7P8lIP+WBpYDoyf2VrOZ9LLBzHOKo8zkCZ7JIbMWS9wew4IYtjNTxZ4jBAfdAwJlKgb0OPLpUPT7h5P71dQncrvarQTRMSvbqnJN6hwOtHtRsBYHhPPs2SVqIY9CUdbgV4xI78l9Cy/4os2o7opO9sf5S0vHp3PvgFNW+66QOxBSBANKNVSgGwBr8KKcDDPPZ9umh9jDfaKpuca/g8QMVTIwQ602tOOkH1mwjP0llBaqtF1rij1DmgrcQL6imufWtAQgv/XMaLZfVBnjii0s9lraBdJKtaB4/Sn6uefX354Y=
-deploy:
-  provider: biicode
-  user: KennyRules
-  password:
-    secure: ZHiaa26m5fD7iq5zSZhbwcltpGoAiRDWPiqcJFa/FspeU5YFKZ47RJ6jTn9mR+ZfPEOLLXgca5Urexc5Ck2uWqkm7XH/q+n7Ym+5upNAfUdISL8xvmeGvBzG5r3bhFsGFuNQ9T9Un1x8Kqx2VLFjyBYh2pwA1COQB42UHY7+n05+SotpDgW+NjHpLPoTDXtPf5Tu4nXU5WimPCvBS2JjVZix842s55/MdsZe5dCmy6BhzlG/7Sy7s4RPuYNcp9QNc+dTZO6IJtixEeE2hLdkSMwb5OLR2rKwYBwCRn47uA8FR9NMG8cNqnW8tZqx6B0ZmNJFLC4CasZvf+BxN27tVeyKhk4Kif9lHoHsTPth/vT9q9lOzq2P0Kn52NrYNStlIn0gFrxgJvUkhLE/CxuMfKTHzu35q1HEK7po2PfpUdHdKGocxWSpH7I5sWj1pnLL1LgTaJYI7Kd+D1FAqcqFTbp6Vu7FXqs1Vn3Z//rK7YSbu7NqkhnWD0uy08eAoZAXnFQ0LWFa5+lXYy8SUnb7CMyahj2Ve6qtQ4M7AvCqibRt9/HEZj6i5xm/vItFD1n9eodlNJes+w0FxYT5p8N93JTLG0HDVZ7vwaRLc4Zn7tvsoxdwbXbcH07FF3F8+D6rmug31vCgMqg7LRE7OmV5XaBVGCbQSKJMYnxbLVDkSnA=
-  on:
-    branch: master
-    repo: $USER/$BLOCK_NAME
