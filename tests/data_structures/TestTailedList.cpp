@@ -5,7 +5,7 @@
 *  TO-DO: Further define
 **/
 
-#include "../../src/TailedList.h"
+#include "../../src/TailedLinkedList.h"
 #include "../../include/catch.hpp"
 
 SCENARIO("A Tailed Linked List can have items added and removed from it", "[TailedLinkedList]")
