@@ -1,0 +1,22 @@
+TestQueue
+SCENARIO A Queue can have items enqueued [Queue]
+	GIVEN A empty queue
+		WHEN items are enqueued
+			THEN the size increases
+			AND_THEN the elements exist
+		AND_WHEN items are dequeued
+			THEN the size remains 0
+SCENARIO A Queue can have items dequeued [Queue]
+	GIVEN A queue with elements enqueued
+		WHEN items are dequeued
+			THEN the items are dequeued in the order they were added
+			AND_THEN the size decreases
+SCENARIO A Queue can have the front element peeked at [Queue]
+	GIVEN A empty queue
+		WHEN items are enqueued
+			THEN the first element enqueued can be peeked at
+	GIVEN A queue with elements enqueued
+		WHEN more items are enqueued
+			THEN the first element originally enqueued can be peeked at
+		WHEN items are dequeued
+			THEN the earliest element originally enqueued can be peeked at

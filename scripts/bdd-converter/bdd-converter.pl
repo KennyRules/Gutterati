@@ -31,7 +31,7 @@ unless(open FILE, '>'.$filename) {
     die "\nUnable to create $filename\n\n";
 }
 
-print FILE "#include \"catch.hpp\"\n";
+print FILE "#include \"../../include/catch.hpp\"\n";
 
 printHeader();
 
@@ -88,7 +88,7 @@ while(<STDIN>) {
             $description = trim($description);
         }
 
-        print FILE "$label( \"$description\"" . $line_end;
+        print FILE "$label( \"$description\" " . $line_end;
         $brackets_remaining++;
     }
     else {
@@ -122,8 +122,8 @@ sub printTabs {
 
 sub printHeader {
     print FILE "\n";
-    print FILE "// -----------------------------------------------------------------------\n";
-    print FILE "// ---- Auto-generated BDD-Style Catch Unit Test  by BDD-Converter.pl ----\n";
-    print FILE "// -----------------------------------------------------------------------\n";
+    print FILE "// ----------------------------------------------------------------------\n";
+    print FILE "// ---- Auto-generated BDD-Style Catch Unit Test by BDD-Converter.pl ----\n";
+    print FILE "// ----------------------------------------------------------------------\n";
     print FILE "\n";
 }
