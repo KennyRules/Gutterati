@@ -11,7 +11,7 @@
 SCENARIO("A Singly Linked List can have items added and removed from it", "[SingleLinkedList]")
 {
     GIVEN("A empty Singly Linked List") {
-        SinglyLinkedList list;
+        SinglyLinkedList<int> list;
         REQUIRE(list.size() == 0);
 
         WHEN("Items are added") {
@@ -35,7 +35,7 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
     }
 
     GIVEN("A Singly Linked List with one element") {
-        SinglyLinkedList list;
+        SinglyLinkedList<int> list;
         list.add(5);
         REQUIRE(list.size() == 1);
 
@@ -55,7 +55,7 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
     }
 
     GIVEN("A Singly Linked List with two elements") {
-        SinglyLinkedList list;
+        SinglyLinkedList<int> list;
         list.add(7);
         list.add(11);
         REQUIRE(list.size() == 2);
@@ -78,7 +78,7 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
     }
 
     GIVEN( "A Singly Linked List with three elements" ) {
-        SinglyLinkedList list;
+        SinglyLinkedList<int> list;
         list.add(7);
         list.add(8);
         list.add(9);

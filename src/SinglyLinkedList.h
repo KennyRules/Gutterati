@@ -1,85 +1,90 @@
 #pragma once
 
+template <typename T>
 class SinglyLinkedList
 {
     private:
         struct Node
         {
-            int data;
+            T data;
             Node* next;
         };
-
         Node* m_head;
-        int m_size;
 
     public:
         SinglyLinkedList();
 
-        void add(int aValue);
-        void remove(int aValue);
-        int find(int aValue) const;
+        void add(T aValue);
+        void remove(T aValue);
+        T find(T aValue) const;
         int size() const;
 };
 
-SinglyLinkedList::SinglyLinkedList() 
-{
-    m_head = nullptr;
-    m_size = 0;
-}
+template <typename T>
+SinglyLinkedList<T>::SinglyLinkedList() : m_head(nullptr) { }
 
-void SinglyLinkedList::add(int aValue) 
+template <typename T>
+void SinglyLinkedList<T>::add(T aValue)
 {
     Node* newNode = new Node{ aValue, nullptr };
     if (m_head == nullptr) {
         m_head = newNode;
     } 
     else {
-        Node* cur = m_head;
-        while (cur->next != nullptr)
-            cur = cur->next;
-        cur->next = newNode;
+        Node* currentNode = m_head;
+        while (currentNode->next != nullptr)
+            currentNode = currentNode->next;
+        currentNode->next = newNode;
     }
-    m_size++;
 }
 
-void SinglyLinkedList::remove(int aValue) 
+
+template <typename T>
+void SinglyLinkedList<T>::remove(T aValue)
 {
     Node* prev = nullptr;
-    Node* cur = m_head;
+    Node* currentNode = m_head;
 
-    while (cur != nullptr) {
-        if (cur->data == aValue) {
+    while (currentNode != nullptr) {
+        if (currentNode->data == aValue) {
             if (prev != nullptr) {
-                prev->next = cur->next;
+                prev->next = currentNode->next;
             } 
             else {
                 m_head = m_head->next;
             }
-            cur->next = nullptr;
-            delete cur;
-            m_size--;
+            currentNode->next = nullptr;
+            delete currentNode;
             return;
         }
         else {
-            prev = cur;
-            cur = cur->next;
+            prev = currentNode;
+            currentNode = currentNode->next;
         }
     }
 }
 
-int SinglyLinkedList::find(int aValue) const 
+template <typename T>
+T SinglyLinkedList<T>::find(T aValue) const
 {
-    Node* cur = m_head;
-    while (cur != nullptr) {
-        if (cur->data == aValue) {
+    Node* currentNode = m_head;
+    while (currentNode != nullptr) {
+        if (currentNode->data == aValue) {
             return aValue;
         }
-        cur = cur->next;
+        currentNode = currentNode->next;
     }
     return -1;
 }
 
-int SinglyLinkedList::size() const 
+template <typename T>
+int SinglyLinkedList<T>::size() const
 {
-    return m_size;
+    Node* currentNode = m_head;
+    int size = 0;
+    while (currentNode != nullptr) {
+        size++;
+        currentNode = currentNode->next;
+    }
+    return size;
 }
