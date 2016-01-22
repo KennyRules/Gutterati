@@ -30,6 +30,7 @@ SCENARIO( "A Queue can have items enqueued", "[Queue]") {
 		}
 	}
 }
+
 SCENARIO( "A Queue can have items dequeued", "[Queue]") {
 
 	GIVEN( "A queue with elements enqueued" ) {
@@ -51,6 +52,7 @@ SCENARIO( "A Queue can have items dequeued", "[Queue]") {
 		}
 	}
 }
+
 SCENARIO( "A Queue can have the front element peeked at", "[Queue]") {
 
 	GIVEN( "A empty queue" ) {

@@ -6,7 +6,6 @@ template <typename T>
 class TailedLinkedList : public SinglyLinkedList<T>
 {
     private:
-        typedef SinglyLinkedList<T>::Node Node;
         Node* m_tail;
 
     public:
