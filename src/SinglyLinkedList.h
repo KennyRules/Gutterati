@@ -1,9 +1,11 @@
 #pragma once
 
+#include "LinkedList.h"
+
 template <typename T>
-class SinglyLinkedList
+class SinglyLinkedList : public LinkedList<T>
 {
-    private:
+    protected:
         struct Node
         {
             T data;
@@ -42,13 +44,13 @@ void SinglyLinkedList<T>::add(T aValue)
 template <typename T>
 void SinglyLinkedList<T>::remove(T aValue)
 {
-    Node* prev = nullptr;
+    Node* prevNode = nullptr;
     Node* currentNode = m_head;
 
     while (currentNode != nullptr) {
         if (currentNode->data == aValue) {
-            if (prev != nullptr) {
-                prev->next = currentNode->next;
+            if (prevNode != nullptr) {
+                prevNode->next = currentNode->next;
             } 
             else {
                 m_head = m_head->next;
@@ -58,7 +60,7 @@ void SinglyLinkedList<T>::remove(T aValue)
             return;
         }
         else {
-            prev = currentNode;
+            prevNode = currentNode;
             currentNode = currentNode->next;
         }
     }

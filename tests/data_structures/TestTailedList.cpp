@@ -1,17 +1,17 @@
-/** 
- *  @file 
- *  @brief Exercise a Singly Linked List
- *
- *  TO-DO: Further define 
- **/
+/**
+*  @file
+*  @brief Exercise a Singly Linked List
+*
+*  TO-DO: Further define
+**/
 
-#include "../../src/SinglyLinkedList.h"
+#include "../../src/TailedList.h"
 #include "../../include/catch.hpp"
 
-SCENARIO("A Singly Linked List can have items added and removed from it", "[SingleLinkedList]")
+SCENARIO("A Tailed Linked List can have items added and removed from it", "[TailedLinkedList]")
 {
-    GIVEN("A empty Singly Linked List") {
-        SinglyLinkedList<int> list;
+    GIVEN("A empty Tailed Linked List") {
+        TailedLinkedList<int> list;
 
         REQUIRE(list.size() == 0);
 
@@ -35,7 +35,7 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
         }
     }
 
-    GIVEN("A Singly Linked List with one element") {
+    GIVEN("A Tailed Linked List with one element") {
         SinglyLinkedList<int> list;
         list.add(5);
         REQUIRE(list.size() == 1);
@@ -55,7 +55,7 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
         }
     }
 
-    GIVEN("A Singly Linked List with two elements") {
+    GIVEN("A Tailed Linked List with two elements") {
         SinglyLinkedList<int> list;
         list.add(7);
         list.add(11);
@@ -78,23 +78,23 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
         }
     }
 
-    GIVEN( "A Singly Linked List with three elements" ) {
+    GIVEN("A Tailed Linked List with three elements") {
         SinglyLinkedList<int> list;
         list.add(7);
         list.add(8);
         list.add(9);
         REQUIRE(list.size() == 3);
 
-        WHEN( "The head is removed" ) {
+        WHEN("The head is removed") {
             list.remove(7);
-            THEN( "The list has the remaining elements" ) {
+            THEN("The list has the remaining elements") {
                 REQUIRE(list.size() == 2);
                 REQUIRE(list.find(8) == 8);
                 REQUIRE(list.find(9) == 9);
             }
         }
 
-        WHEN( "The tail is removed" ) {
+        WHEN("The tail is removed") {
             list.remove(9);
             THEN("The list has the remaining elements") {
                 REQUIRE(list.size() == 2);
@@ -103,9 +103,9 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
             }
         }
 
-        WHEN( "The middle is removed" ) {
+        WHEN("The middle is removed") {
             list.remove(8);
-            THEN( "The list has the remaining elements" ) {
+            THEN("The list has the remaining elements") {
                 REQUIRE(list.size() == 2);
                 REQUIRE(list.find(7) == 7);
                 REQUIRE(list.find(9) == 9);
