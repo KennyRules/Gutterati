@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-template <class T>
+template <typename T>
 class Queue
 {
     private:
