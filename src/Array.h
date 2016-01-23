@@ -29,14 +29,21 @@ Array<T>::Array(size_t aSize)
 template <typename T>
 Array<T>::Array(const Array<T>& other)
 {
-    
+    m_size = other.m_size;
+    m_data = new T[m_size]();
+    for (size_t i = 0; i < m_size; ++i) {
+        m_data[i] = other.m_data[i];
+    }
 }
 
 template <typename T>
 Array<T>& Array<T>::operator=(Array<T> other)
 {
     m_size = other.m_size;
-    m_data = other.m_data;
+    m_data = new T[m_size]();
+    for (size_t i = 0; i < m_size; ++i) {
+        m_data[i] = other.m_data[i];
+    }
     return *this;
 }
 

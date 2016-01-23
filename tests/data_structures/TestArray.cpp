@@ -56,5 +56,42 @@ SCENARIO("An Array can hold elements in a contiguous block of memory", "[Array]"
                 REQUIRE(anArray.getSize() == 10);
             }
         }
+        
+    }
+
+    GIVEN("A new Array with size of 10 and elements initialized") {
+        Array<int> originalArray(10);
+        for (size_t i = 0; i < 10; ++i) {
+            originalArray[i] = i * 20;
+        }
+
+        WHEN("A new Array is created using the original Array") {
+            Array<int> newArray(originalArray);
+
+            THEN("The new Array has the same elements as the original Array") {
+                for (size_t i = 0; i < 10; ++i) {
+                    REQUIRE(originalArray[i] == newArray[i]);
+                }
+                REQUIRE(originalArray.getSize() == newArray.getSize());
+            }
+            AND_THEN("Changing the elements in the original Array does not change the new one") {
+                originalArray[0] = -42;
+                REQUIRE(originalArray[0] != newArray[0]);
+            }
+        }
+        AND_WHEN("A new Array is created using the original Array via assignment") {
+            Array<int> newArray = originalArray;
+
+            THEN("The new Array has the same elements as the original Array") {
+                for (size_t i = 0; i < 10; ++i) {
+                    REQUIRE(originalArray[i] == newArray[i]);
+                }
+                REQUIRE(originalArray.getSize() == newArray.getSize());
+            }
+            AND_THEN("Changing the elements in the original Array does not change the new one") {
+                originalArray[0] = -13;
+                REQUIRE(originalArray[0] != newArray[0]);
+            }
+        }
     }
 }
