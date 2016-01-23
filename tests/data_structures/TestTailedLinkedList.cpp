@@ -102,8 +102,17 @@ SCENARIO("A Tailed Linked List can have items added and removed from it", "[Tail
                 REQUIRE(list.find(8) == 8);
             }
         }
+        AND_WHEN("All elements are removed from the tail") {
+            REQUIRE(list.size() == 3);
+            list.remove(7);
+            list.remove(8);
+            list.remove(9);
+            THEN("The list is empty") {
+                REQUIRE(list.size() == 0);
+            }
+        }
 
-        WHEN("The middle is removed") {
+        AND_WHEN("The middle is removed") {
             list.remove(8);
             THEN("The list has the remaining elements") {
                 REQUIRE(list.size() == 2);
