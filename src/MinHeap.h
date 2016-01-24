@@ -4,7 +4,7 @@
 
 template <typename T>
 class MinHeap : public Heap<T> {
-    private:
+    using Heap<T>::m_heap;
 
     public:
         MinHeap();

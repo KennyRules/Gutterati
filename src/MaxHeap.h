@@ -4,13 +4,13 @@
 
 template <typename T>
 class MaxHeap : public Heap<T> {
-private:
+    using Heap<T>::m_heap;
 
-public:
-    MaxHeap();
-    virtual void insert(T aValue) override;
-    virtual T pop() override;
-    T getMax();
+    public:
+        MaxHeap();
+        virtual void insert(T aValue) override;
+        virtual T pop() override;
+        T getMax();
 };
 
 template <typename T>
