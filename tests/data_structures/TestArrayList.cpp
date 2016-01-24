@@ -13,7 +13,7 @@ SCENARIO("An ArrayList can hold elements in a contiguous block of memory", "[Arr
         }
     }
 
-    GIVEN("An ArrayList with size 0") {
+    GIVEN("An ArrayList with explicit size 0") {
         WHEN("It is created") {
             THEN("It throws an error") {
                 REQUIRE_THROWS_AS(ArrayList<int> anArrayList(0), std::invalid_argument);
@@ -142,6 +142,55 @@ SCENARIO("An ArrayList can grow as more elements are added", "[ArrayList]") {
             AND_THEN("Changing the elements in the original ArrayList does not change the new one") {
                 originalArrayList[5] = -131;
                 REQUIRE(originalArrayList[5] != newArrayList[5]);
+            }
+        }
+    }
+}
+
+SCENARIO("An ArrayList can have elements removed", "[ArrayList]") {
+
+    GIVEN("An ArrayList with no elements") {
+        ArrayList<char> anArrayList;
+        REQUIRE(anArrayList.getSize() == 0);
+        REQUIRE(anArrayList.getCapacity() == 0);
+
+        WHEN("That last element is attempted to be removed") {
+            THEN("It throws an error") {
+                REQUIRE_THROWS_AS(anArrayList.removeLast(), std::out_of_range);
+            }
+            AND_THEN("The size remains 0") {
+                REQUIRE(anArrayList.getSize() == 0);
+                REQUIRE(anArrayList.getCapacity() == 0);
+            }
+        }
+    }
+
+    GIVEN("An ArrayList with some elements") {
+        ArrayList<char> anArrayList;
+        anArrayList.insert('a');
+        anArrayList.insert('b');
+        anArrayList.insert('c');
+        anArrayList.insert('d');
+        REQUIRE(anArrayList.getSize() == 4);
+        REQUIRE(anArrayList.getCapacity() == 5);
+        REQUIRE(anArrayList[0] == 'a');
+        REQUIRE(anArrayList[1] == 'b');
+        REQUIRE(anArrayList[2] == 'c');
+        REQUIRE(anArrayList[3] == 'd');
+
+        WHEN("Elements are removed") {
+            anArrayList.removeLast();
+
+            THEN("The size shrinks") {
+                REQUIRE(anArrayList.getSize() == 3);
+
+                anArrayList.removeLast();
+                anArrayList.removeLast();
+                anArrayList.removeLast();
+                REQUIRE(anArrayList.getSize() == 0);
+            }
+            AND_THEN("Accessing the removed elements isn't allowed") {
+                REQUIRE_THROWS_AS(anArrayList[3], std::out_of_range);
             }
         }
     }

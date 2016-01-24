@@ -11,15 +11,21 @@ class ArrayList
         size_t m_size = 0;
 
     public:
+        ArrayList();
         ArrayList(size_t aSize);
         ArrayList(const ArrayList<T>& other);
         ArrayList<T>& operator=(ArrayList<T> other);
         ~ArrayList();
         T& operator[](size_t aIndex);
+        const T& operator[](size_t aIndex) const;
         size_t getSize() const;
         size_t getCapacity() const;
         void insert(T aValue);
+        void removeLast();
 };
+
+template <typename T>
+ArrayList<T>::ArrayList() { }
 
 template <typename T>
 ArrayList<T>::ArrayList(size_t aSize)
@@ -65,8 +71,17 @@ ArrayList<T>::~ArrayList() {
 template <typename T>
 T& ArrayList<T>::operator[](size_t aIndex)
 {
-    if (aIndex < 0 || aIndex >= m_size)
-        throw std::out_of_range("Error: Index is ou of bounds.");
+    if (aIndex >= m_size)
+        throw std::out_of_range("Error: Index is out of bounds.");
+
+    return m_data[aIndex];
+}
+
+template <typename T>
+const T& ArrayList<T>::operator[](size_t aIndex) const
+{
+    if (aIndex >= m_size)
+        throw std::out_of_range("Error: Index is out of bounds.");
 
     return m_data[aIndex];
 }
@@ -95,6 +110,19 @@ void ArrayList<T>::insert(T aValue)
         delete[] m_data;
         m_data = newData;
     }
+    else if (m_size == 0) {
+        m_capacity = 2;
+        m_data = new T[m_capacity]();
+    }
     m_data[m_size] = aValue;
     m_size++;
+}
+
+template <typename T>
+void ArrayList<T>::removeLast()
+{
+    if (m_size == 0) {
+        throw std::out_of_range("Error: Cannot remove from empty ArrayList");
+    }
+    m_size--;
 }
