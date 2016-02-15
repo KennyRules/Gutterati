@@ -1,5 +1,6 @@
+# A lot of this was taken from https://github.com/philsquared/Catch
 language: cpp
-sudo: true
+sudo: false
 
 cache:
   ccache: true
@@ -22,15 +23,6 @@ notifications:
   email: false
   slack:
     secure: eWomj3OJ9UtPP4/jGYQ2o+vbRQMpZmY2Tug+Og+17W73A+ldCmxNeYmHXKP++pEvhaeOaI8qBbmq8PBvbv3YZS4Uj3TGwOjZPJemFFVYoOHrcRjiybTlLrJDXeUHEfKgNuNs5Z/R8FvP03VDkVHlwJwxNRfUcIc0yUS0HTAE9dAt51FWRW1e64epzxy5XaChAOBplerjV7Nd3R8sdeAN8NOsOIbBxJBY30sFLb2mzDFsLl61Ah35HfgDLN5+mM4CUG6QhZTwFFDF+oyDvqSslwx+3FOLQ43XB98fDyRjzzgFWyIsktNmDpNu96wsyguD1fetfZAFRnqci5TCNHXWv4OGAOCRX4TnJVMBoPY4HACIQ06ww+V5B2UpWD0fMmW7P8lIP+WBpYDoyf2VrOZ9LLBzHOKo8zkCZ7JIbMWS9wew4IYtjNTxZ4jBAfdAwJlKgb0OPLpUPT7h5P71dQncrvarQTRMSvbqnJN6hwOtHtRsBYHhPPs2SVqIY9CUdbgV4xI78l9Cy/4os2o7opO9sf5S0vHp3PvgFNW+66QOxBSBANKNVSgGwBr8KKcDDPPZ9umh9jDfaKpuca/g8QMVTIwQ602tOOkH1mwjP0llBaqtF1rij1DmgrcQL6imufWtAQgv/XMaLZfVBnjii0s9lraBdJKtaB4/Sn6uefX354Y=
-
-deploy:
-  provider: biicode
-  user: KennyRules
-  password:
-     secure: "bSu+Mz/2m4TkRp6AIIzmWSb6GMEzym3TZHQ6ZeUzsPODX8Mzi/95lde8HJQn5cTPr3JHN/yPhY6xU1Je5fs9i3drAxDzs35IG02mfD7JBiNakfMZmNCMZlWWwvlVrcH2SL/wrhEMsv+eIgJfIQ89RoPsam61/MhldA7JFzSkXDTV7H7FEKj0h9Pm2vMw599ereOQx1NFitXRVz6f3pvZspA7f3H5DZXmXDrEGhtRjXriIYS9+Aup3PWOw6ZpvQwLnBEKXA/Ozk9VfwG6Y9nqQiWZj+vCltFynxuE/t/MvXOVSpfht7PEka+RvPRFvaQwFf9Vnc9lcgNnTy61yEmDuJTEENA/WH+nPw1aHItddc4m96cTgT6WnEfnWVAAFxTioikHC09lT7u5YNz7CddILqbhVrbfsZoGdRz02d8tPXQuwSk/R8t/yq09UQJur3vbNYFOkGc4uIwAc7jvnvMYvoNbMccmG59ZmE01bTUIZsWefUVbaJWhJUv7TzHE7VbWzV02iDk+T5cgIqfE0LOGhDTcBUEQWUQZwNt/XxehGcY1/ZRNzNxOzm0THji93fDKRbfvIVbixH7+FbwQh7yC+rgd0nWm+NqNzmptoooGPGCbGf6G/1xYW31/+l9Yq70meYSh3PCo3FI0GT4DVVHwFtwYxDlS2LbxRVATv4XHJRM="
-  on:
-    branch: master
-    repo: $USER/$BLOCK_NAME
 
 matrix:
   allow_failures:
@@ -171,7 +163,6 @@ matrix:
     #  env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
 
 install:
-  # This section taken from https://github.com/philsquared/Catch
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
 
