@@ -1,4 +1,4 @@
-cmake_minimum_required( VERSION 3.0 )
+cmake_minimum_required( VERSION 2.8 )
 
 set ( Tutorial_VERSION_MAJOR 0 )
 set ( Tutorial_VERSION_MINOR 1 )
@@ -25,3 +25,6 @@ file( GLOB Gutterati_Test_DS_SRC
 set( Gutterati_Test_MAIN ${GUTTERATI_DIR}/tests/GutteratiTestMain.cpp )
 
 add_executable( TestGutterati ${Gutterati_Test_MAIN} ${Gutterati_Test_DS_SRC} ${Gutterati_SRC} )
+
+enable_testing()
+add_test( NAME RunTests COMMAND TestGutterati )
