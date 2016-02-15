@@ -177,38 +177,19 @@ install:
 
   - |
     if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then
-      wget http://apt.biicode.com/install.sh && chmod +x install.sh && ./install.sh
       CMAKE_URL="http://www.cmake.org/files/v3.3/cmake-3.3.2-Linux-x86_64.tar.gz"
       mkdir cmake && travis_retry wget --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
       export PATH=${DEPS_DIR}/cmake/bin:${PATH}
-      bii setup:cpp
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-      brew update
-      brew install cmake
-      brew install ccache
-      brew outdated cmake --verbose || brew upgrade cmake
-      cd ${TRAVIS_BUILD_DIR}/../
-      brew install python
-      git clone https://github.com/biicode/biicode.git
-      BII_ABS_PATH="${TRAVIS_BUILD_DIR}/../biicode"
-      cd ${BII_ABS_PATH}
-      git submodule update --init --recursive
-      pip install -r client/requirements.txt
-      pip install -r common/requirements.txt
-      export PATH=$BII_ABS_PATH:$PATH
-      cmake --version
+      brew install make ccache
     fi
-    cd ${TRAVIS_BUILD_DIR}
-    cmake --version
 
 before_script:
   - export CXX=${COMPILER}
-  - export TRAVIS_CXX=$CXX
   - cd ${TRAVIS_BUILD_DIR}
+  - cmake . -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+  - cd build
 
 script:
-##################### CHANGE WITH YOUR CUSTOM CHECKS OR TEST EXECUTION ##################
-  - bii init -L
-  - travis_wait 1 bii configure || true # Recommend fix for weird bii build behavior on osx.
-  - bii build ; bii test
-#########################################################################################
+  - make -j 2
+  - ctest -V -j 2
