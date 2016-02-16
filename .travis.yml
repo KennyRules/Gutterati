@@ -168,7 +168,7 @@ install:
 
   - |
     if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-      brew install make ccache
+      brew install cmake ccache
     fi
 
 before_script:
