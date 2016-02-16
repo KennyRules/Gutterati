@@ -29,6 +29,7 @@ matrix:
     - os: osx
 
   include:
+    # Linix Builds
     - os: linux
       compiler: clang
       addons: &clang35
@@ -37,10 +38,10 @@ matrix:
           packages: ['clang-3.5']
       env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Release'
 
-    #- os: linux
-    #  compiler: clang
-    #  addons: *clang35
-    #  env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Debug'
+    - os: linux
+      compiler: clang
+      addons: *clang35
+      env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Debug'
 
     - os: linux
       compiler: clang
@@ -50,11 +51,10 @@ matrix:
           packages: ['clang-3.6']
       env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Release'
 
-    #- os: linux
-    #  compiler: clang
-    #  addons: *clang36
-    #  env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Debug'
-
+    - os: linux
+      compiler: clang
+      addons: *clang36
+      env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Debug'
 
     - os: linux
       compiler: clang
@@ -64,10 +64,10 @@ matrix:
           packages: ['clang-3.7']
       env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Release'
 
-    #- os: linux
-    #  compiler: clang
-    #  addons: *clang37
-    #  env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Debug'
+    - os: linux
+      compiler: clang
+      addons: *clang37
+      env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Debug'
 
 
     - os: linux
@@ -78,10 +78,10 @@ matrix:
           packages: ['clang-3.8']
       env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Release'
 
-    #- os: linux
-    #  compiler: clang
-    #  addons: *clang38
-    #  env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Debug'
+    - os: linux
+      compiler: clang
+      addons: *clang38
+      env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Debug'
 
     - os: linux
       compiler: gcc
@@ -91,10 +91,10 @@ matrix:
          packages: ['g++-4.8']
       env: COMPILER='ccache g++-4.8' BUILD_TYPE='Release'
 
-    #- os: linux
-    #  compiler: gcc
-    #  addons: *gcc48
-    #  env: COMPILER='ccache g++-4.8' BUILD_TYPE='Debug'
+    - os: linux
+      compiler: gcc
+      addons: *gcc48
+      env: COMPILER='ccache g++-4.8' BUILD_TYPE='Debug'
 
     - os: linux
       compiler: gcc
@@ -104,10 +104,10 @@ matrix:
           packages: ['g++-4.9']
       env: COMPILER='ccache g++-4.9' BUILD_TYPE='Release'
 
-    #- os: linux
-    #  compiler: gcc
-    #  addons: *gcc49
-    #  env: COMPILER='ccache g++-4.9' BUILD_TYPE='Debug'
+    - os: linux
+      compiler: gcc
+      addons: *gcc49
+      env: COMPILER='ccache g++-4.9' BUILD_TYPE='Debug'
 
     - os: linux
       compiler: gcc
@@ -117,50 +117,51 @@ matrix:
           packages: ['g++-5']
       env: COMPILER='ccache g++-5' BUILD_TYPE='Release'
 
-    #- os: linux
-    #  compiler: gcc
-    #  addons: *gcc5
-    #  env: COMPILER='ccache g++-5' BUILD_TYPE='Debug'
+    - os: linux
+      compiler: gcc
+      addons: *gcc5
+      env: COMPILER='ccache g++-5' BUILD_TYPE='Debug'
 
+    # OSX Builds
     - os: osx
       osx_image: xcode7.2
       compiler: clang
       env: COMPILER='ccache clang++' BUILD_TYPE='Release'
 
-    #- os: osx
-    #  osx_image: xcode7.2
-    #  compiler: clang
-    #  env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
+    - os: osx
+      osx_image: xcode7.2
+      compiler: clang
+      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
 
     - os: osx
       osx_image: xcode7.1
       compiler: clang
       env: COMPILER='ccache clang++' BUILD_TYPE='Release'
 
-    #- os: osx
-    #  osx_image: xcode7.1
-    #  compiler: clang
-    #  env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
+    - os: osx
+      osx_image: xcode7.1
+      compiler: clang
+      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
 
     - os: osx
       osx_image: xcode7
       compiler: clang
       env: COMPILER='ccache clang++' BUILD_TYPE='Release'
 
-    #- os: osx
-    #  osx_image: xcode7
-    #  compiler: clang
-    #  env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
+    - os: osx
+      osx_image: xcode7
+      compiler: clang
+      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
 
     - os: osx
       osx_image: xcode6.4
       compiler: clang
       env: COMPILER='ccache clang++' BUILD_TYPE='Release'
 
-    #- os: osx
-    #  osx_image: xcode6.4
-    #  compiler: clang
-    #  env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
+    - os: osx
+      osx_image: xcode6.4
+      compiler: clang
+      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
 
 install:
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
