@@ -2,182 +2,57 @@
 language: cpp
 sudo: false
 
-cache:
-  ccache: true
-  directories:
-    - $HOME/.ccache
-
-env:
-  global:
-  - USER_EMAIL=drewd@code-phoenix.com
-  - USER_NAME="Andrew Diamantoukos"
-  - COMMIT_IGNORE_BUILD="Promoted version.***travis***"
-  - BLOCK_NAME=Gutterati
-  - USER=KennyRules
-  - USE_CCACHE=1
-  - CCACHE_COMPRESS=1
-  - CCACHE_MAXSIZE=200M
-  - CCACHE_CPP2=1
-
-notifications:
-  email: false
-  slack:
-    secure: eWomj3OJ9UtPP4/jGYQ2o+vbRQMpZmY2Tug+Og+17W73A+ldCmxNeYmHXKP++pEvhaeOaI8qBbmq8PBvbv3YZS4Uj3TGwOjZPJemFFVYoOHrcRjiybTlLrJDXeUHEfKgNuNs5Z/R8FvP03VDkVHlwJwxNRfUcIc0yUS0HTAE9dAt51FWRW1e64epzxy5XaChAOBplerjV7Nd3R8sdeAN8NOsOIbBxJBY30sFLb2mzDFsLl61Ah35HfgDLN5+mM4CUG6QhZTwFFDF+oyDvqSslwx+3FOLQ43XB98fDyRjzzgFWyIsktNmDpNu96wsyguD1fetfZAFRnqci5TCNHXWv4OGAOCRX4TnJVMBoPY4HACIQ06ww+V5B2UpWD0fMmW7P8lIP+WBpYDoyf2VrOZ9LLBzHOKo8zkCZ7JIbMWS9wew4IYtjNTxZ4jBAfdAwJlKgb0OPLpUPT7h5P71dQncrvarQTRMSvbqnJN6hwOtHtRsBYHhPPs2SVqIY9CUdbgV4xI78l9Cy/4os2o7opO9sf5S0vHp3PvgFNW+66QOxBSBANKNVSgGwBr8KKcDDPPZ9umh9jDfaKpuca/g8QMVTIwQ602tOOkH1mwjP0llBaqtF1rij1DmgrcQL6imufWtAQgv/XMaLZfVBnjii0s9lraBdJKtaB4/Sn6uefX354Y=
-
+os:
+  - linux
+  - osx
+compiler: 
+  - gcc
+  - clang
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
+    - clang
 matrix:
   allow_failures:
     - os: osx
-
-  include:
-    # Linix Builds
-    - os: linux
-      compiler: clang
-      addons: &clang35
-        apt:
-          sources: ['llvm-toolchain-precise-3.5', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.5']
-      env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: clang
-      addons: *clang35
-      env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Debug'
-
-    - os: linux
-      compiler: clang
-      addons: &clang36
-        apt:
-          sources: ['llvm-toolchain-precise-3.6', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.6']
-      env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: clang
-      addons: *clang36
-      env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Debug'
-
-    - os: linux
-      compiler: clang
-      addons: &clang37
-        apt:
-          sources: ['llvm-toolchain-precise-3.7', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.7']
-      env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: clang
-      addons: *clang37
-      env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Debug'
-
-
-    - os: linux
-      compiler: clang
-      addons: &clang38
-        apt:
-          sources: ['llvm-toolchain-precise', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.8']
-      env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: clang
-      addons: *clang38
-      env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Debug'
-
-    - os: linux
-      compiler: gcc
-      addons: &gcc48
-        apt:
-         sources: ['ubuntu-toolchain-r-test']
-         packages: ['g++-4.8']
-      env: COMPILER='ccache g++-4.8' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc48
-      env: COMPILER='ccache g++-4.8' BUILD_TYPE='Debug'
-
-    - os: linux
-      compiler: gcc
-      addons: &gcc49
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-4.9']
-      env: COMPILER='ccache g++-4.9' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc49
-      env: COMPILER='ccache g++-4.9' BUILD_TYPE='Debug'
-
-    - os: linux
-      compiler: gcc
-      addons: &gcc5
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-5']
-      env: COMPILER='ccache g++-5' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc5
-      env: COMPILER='ccache g++-5' BUILD_TYPE='Debug'
-
-    # OSX Builds
-    - os: osx
-      osx_image: xcode7.2
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Release'
-
-    - os: osx
-      osx_image: xcode7.2
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
-
-    - os: osx
-      osx_image: xcode7.1
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Release'
-
-    - os: osx
-      osx_image: xcode7.1
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
-
-    - os: osx
-      osx_image: xcode7
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Release'
-
-    - os: osx
-      osx_image: xcode7
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
-
-    - os: osx
-      osx_image: xcode6.4
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Release'
-
-    - os: osx
-      osx_image: xcode6.4
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
 
 install:
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
 
   - |
-    if [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-      brew install cmake ccache
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 
+      wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz
+      tar -xzf cmake-3.4.3-Linux-x86_64.tar.gz      
+    elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
+      wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Darwin-x86_64.tar.gz
+      tar -xzf cmake-3.4.3-Darwin-x86_64.tar.gz
     fi
 
 before_script:
   - export CXX=${COMPILER}
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 
+      export CMAKE_DIR=./cmake-3.4.3-Linux-x86_64/bin
+    elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
+      export CMAKE_DIR=./cmake-3.4.3-Darwin-x86_64/CMake.app/Contents/bin
+    fi
+
   - cd ${TRAVIS_BUILD_DIR}
-  - cmake . -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+  - cmake --version
+  - ${CMAKE_DIR}/cmake --version
+  - ${CMAKE_DIR}/cmake . -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
   - cd build
 
 script:
   - make -j 2
   - ctest -V -j 2
+
+notifications:
+  email: false
+  slack:
+    secure: eWomj3OJ9UtPP4/jGYQ2o+vbRQMpZmY2Tug+Og+17W73A+ldCmxNeYmHXKP++pEvhaeOaI8qBbmq8PBvbv3YZS4Uj3TGwOjZPJemFFVYoOHrcRjiybTlLrJDXeUHEfKgNuNs5Z/R8FvP03VDkVHlwJwxNRfUcIc0yUS0HTAE9dAt51FWRW1e64epzxy5XaChAOBplerjV7Nd3R8sdeAN8NOsOIbBxJBY30sFLb2mzDFsLl61Ah35HfgDLN5+mM4CUG6QhZTwFFDF+oyDvqSslwx+3FOLQ43XB98fDyRjzzgFWyIsktNmDpNu96wsyguD1fetfZAFRnqci5TCNHXWv4OGAOCRX4TnJVMBoPY4HACIQ06ww+V5B2UpWD0fMmW7P8lIP+WBpYDoyf2VrOZ9LLBzHOKo8zkCZ7JIbMWS9wew4IYtjNTxZ4jBAfdAwJlKgb0OPLpUPT7h5P71dQncrvarQTRMSvbqnJN6hwOtHtRsBYHhPPs2SVqIY9CUdbgV4xI78l9Cy/4os2o7opO9sf5S0vHp3PvgFNW+66QOxBSBANKNVSgGwBr8KKcDDPPZ9umh9jDfaKpuca/g8QMVTIwQ602tOOkH1mwjP0llBaqtF1rij1DmgrcQL6imufWtAQgv/XMaLZfVBnjii0s9lraBdJKtaB4/Sn6uefX354Y=
