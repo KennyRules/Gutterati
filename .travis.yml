@@ -161,7 +161,7 @@ before_script:
     fi
 
   - cd ${TRAVIS_BUILD_DIR}
-  - . -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+  - cmake . -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
   - cd build
 
 script:
