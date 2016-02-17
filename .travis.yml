@@ -154,6 +154,7 @@ install:
     fi
 
 before_script:
+  - export CXX=${COMPILER}
   - |
     if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 
       export CMAKE_DIR=$(pwd)/cmake-3.4.3-Linux-x86_64/bin
