@@ -144,18 +144,24 @@ matrix:
 install:
   - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
   - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
+
   - |
     if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 
-      CMAKE_URL="http://www.cmake.org/files/v3.3/cmake-3.3.2-Linux-x86_64.tar.gz"
-      mkdir cmake && travis_retry wget --quiet -O - ${CMAKE_URL} | tar --strip-components=1 -xz -C cmake
-      export PATH=${DEPS_DIR}/cmake/bin:${PATH}
+      wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz
+      tar -xzf cmake-3.4.3-Linux-x86_64.tar.gz
     elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
       brew install cmake ccache
     fi
 
 before_script:
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 
+      export CMAKE_DIR=$(pwd)/cmake-3.4.3-Linux-x86_64/bin
+      export PATH=${CMAKE_DIR}:${PATH}
+    fi
+
   - cd ${TRAVIS_BUILD_DIR}
-  - cmake . -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+  - . -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
   - cd build
 
 script:
