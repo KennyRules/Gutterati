@@ -27,7 +27,6 @@ file( GLOB Gutterati_Test_DS_SRC
 set( Gutterati_Test_MAIN ${GUTTERATI_DIR}/tests/GutteratiTestMain.cpp )
 
 add_executable( TestGutterati ${Gutterati_Test_MAIN} ${Gutterati_Test_DS_SRC} )
-target_link_libraries (TestGutterati LibGutterati)
 
 set_target_properties( TestGutterati PROPERTIES OUTPUT_NAME_DEBUG TestGutterati-debug )
 set_target_properties( TestGutterati PROPERTIES OUTPUT_NAME_RELEASE TestGutterati-release )
