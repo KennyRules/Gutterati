@@ -14,7 +14,7 @@
  * @param argc Number of arguments in argv
  * @param argv Extra options passed in.
  */
-int main(int argc, char* const argv[])
+int main(int argc, const char* argv[])
 {
     int result = Catch::Session().run(argc, argv);
 

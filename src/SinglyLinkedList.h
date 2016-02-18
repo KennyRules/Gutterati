@@ -29,15 +29,8 @@ template <typename T>
 void SinglyLinkedList<T>::add(T aValue)
 {
     Node* newNode = new Node{ aValue, nullptr };
-    if (m_head == nullptr) {
-        m_head = newNode;
-    } 
-    else {
-        Node* currentNode = m_head;
-        while (currentNode->next != nullptr)
-            currentNode = currentNode->next;
-        currentNode->next = newNode;
-    }
+    newNode->next = m_head;
+    m_head = newNode;
 }
 
 
