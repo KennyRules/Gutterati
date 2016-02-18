@@ -1,18 +1,20 @@
-cmake_minimum_required( VERSION 2.8 )
+cmake_minimum_required( VERSION 3.0 )
 
-set ( Tutorial_VERSION_MAJOR 0 )
-set ( Tutorial_VERSION_MINOR 1 )
-set ( Tutorial_VERSION_PATCH 0 )
+project( Gutterati )
 
-set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib )
-set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin )
-set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin )
+set( Gutterati_VERSION_MAJOR 0 )
+set( Gutterati_VERSION_MINOR 1 )
+set( Gutterati_VERSION_PATCH 0 )
 
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11" )
+# set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib )
+# set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin )
+# set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin )
+
+set( CMAKE_CXX_STANDARD 11 )
 
 set( GUTTERATI_DIR ${CMAKE_CURRENT_SOURCE_DIR} )
 
-include_directories( ${GUTTERATI_DIR}/include ${GUTTERATI_DIR}/src )
+include_directories(  ${GUTTERATI_DIR}/src )
 
 file( GLOB Gutterati_SRC 
     "${GUTTERATI_DIR}/src/*.h"
@@ -24,7 +26,12 @@ file( GLOB Gutterati_Test_DS_SRC
 
 set( Gutterati_Test_MAIN ${GUTTERATI_DIR}/tests/GutteratiTestMain.cpp )
 
-add_executable( TestGutterati ${Gutterati_Test_MAIN} ${Gutterati_Test_DS_SRC} ${Gutterati_SRC} )
+add_executable( TestGutterati ${Gutterati_Test_MAIN} ${Gutterati_Test_DS_SRC} )
+
+set_target_properties( TestGutterati PROPERTIES OUTPUT_NAME_DEBUG TestGutterati-debug )
+set_target_properties( TestGutterati PROPERTIES OUTPUT_NAME_RELEASE TestGutterati-release )
+
+add_custom_target( Gutterati SOURCES ${Gutterati_SRC} )
 
 enable_testing()
-add_test( NAME RunTests COMMAND TestGutterati )
+add_test( NAME RunTests COMMAND "$<TARGET_FILE:TestGutterati>" )
