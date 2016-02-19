@@ -27,9 +27,9 @@
 *.out
 *.app
 
-# For Bii/Travis
-bii/
-bin/
+# For doxygen
+docs/html/
+docs/latex/
 
 # Copied and unmodified from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore #
 ## Ignore Visual Studio temporary files, build results, and

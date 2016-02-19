@@ -2,6 +2,8 @@
 
 #include "Array.h"
 
+/// ArrayList is a automatically resizing Array supporting insertion and deletion.
+/// The total capacity of the ArrayList will always grow at a rate of 1.5.
 template <typename T>
 class ArrayList
 {
@@ -24,13 +26,19 @@ class ArrayList
         void removeLast();
 };
 
+/// Default constructor.
+/// Size and capacity will be set to 0.
 template <typename T>
 ArrayList<T>::ArrayList() { }
 
+/// Constructs a new ArrayList with a given initial size.
+/// Initializes a new ArrayList able to hold aSize elements.
+/// @param aSize Amount of elements the new ArrayList can initially hold without resizing.
+/// Must be greater than 0.
 template <typename T>
 ArrayList<T>::ArrayList(size_t aSize)
 {
-    if (aSize <= 0) {
+    if (aSize == 0) {
         throw std::invalid_argument("Error: Size for ArrayList must be greater than 0");
     }
     m_size = aSize;
@@ -38,6 +46,9 @@ ArrayList<T>::ArrayList(size_t aSize)
     m_data = new T[m_capacity]();
 }
 
+/// Copy constructor to create a new ArrayList from an existing one.
+/// Size, capacity and elements will be the same.
+/// @param other Another ArrayList.
 template <typename T>
 ArrayList<T>::ArrayList(const ArrayList<T>& other)
 {
@@ -49,6 +60,8 @@ ArrayList<T>::ArrayList(const ArrayList<T>& other)
     }
 }
 
+/// Assignment operator to replace the elements of this ArrayList with another's.
+///
 template <typename T>
 ArrayList<T>& ArrayList<T>::operator=(ArrayList<T> other)
 {
@@ -86,18 +99,27 @@ const T& ArrayList<T>::operator[](size_t aIndex) const
     return m_data[aIndex];
 }
 
+/// Returns the size of the ArrayList, which is the total number of 
+/// elements currently inserted.
+/// @return Current size of the ArrayList. BLA
 template <typename T>
 size_t ArrayList<T>::getSize() const
 {
     return m_size;
 }
 
+/// Returns the capacity of the ArrayList, which is the total number of
+/// elements that can be inserted before a resize operation occurs.
+/// @return Current capacity of the ArrayList.
 template <typename T>
 size_t ArrayList<T>::getCapacity() const
 {
     return m_capacity;
 }
 
+/// Inserts a new element into the ArrayList.
+/// If the new element fills up the capacity, a resizing operation will occur.
+/// @param aValue A new element to add.
 template <typename T>
 void ArrayList<T>::insert(T aValue)
 {
@@ -118,6 +140,7 @@ void ArrayList<T>::insert(T aValue)
     m_size++;
 }
 
+/// Shrinks the ArrayList down one element.
 template <typename T>
 void ArrayList<T>::removeLast()
 {

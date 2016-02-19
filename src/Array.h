@@ -1,5 +1,7 @@
 #pragma once
 
+/// Array is a thin wrapper for a fixed-size array of elements.
+/// Array provides range checking for indexing operations and a getSize operation.
 template <typename T>
 class Array 
 {
@@ -16,6 +18,8 @@ class Array
         size_t getSize() const;
 };
 
+/// Constructs a new Array.
+/// @param aSize Total amount of elements the Array can contain.
 template <typename T>
 Array<T>::Array(size_t aSize) 
 {
@@ -26,6 +30,9 @@ Array<T>::Array(size_t aSize)
     m_data = new T[m_size]();
 }
 
+/// Copy constructor to create a new Array from an existing one.
+/// @param other Another array from which to construct a new one.
+/// Size and elements will copy over.
 template <typename T>
 Array<T>::Array(const Array<T>& other)
 {
@@ -36,10 +43,16 @@ Array<T>::Array(const Array<T>& other)
     }
 }
 
+/// Assignment operator to replace the elements of this Array with the elements of other.
+/// @param other Another array from which we will copy the elements and size.
+/// Original elements of this Array will be deleted.
 template <typename T>
 Array<T>& Array<T>::operator=(Array<T> other)
 {
     m_size = other.m_size;
+    if (m_data != nullptr) {
+        delete[] m_data;
+    }
     m_data = new T[m_size]();
     for (size_t i = 0; i < m_size; ++i) {
         m_data[i] = other.m_data[i];
@@ -47,6 +60,8 @@ Array<T>& Array<T>::operator=(Array<T> other)
     return *this;
 }
 
+/// Destructor.
+/// Deletes all elements.
 template <typename T>
 Array<T>::~Array()
 {
@@ -55,15 +70,23 @@ Array<T>::~Array()
     }
 }
 
+/// Subscript operator overload.
+/// Checks the range of the index queried and throws std::out_of_range if the index is out of bounds.
+///
+/// @param aIndex 0-based index of array element to return. 
+/// @return Element contained at index aIndex.
 template <typename T>
 T& Array<T>::operator[](size_t aIndex)
 {
-    if (aIndex < 0 || aIndex >= m_size)
-        throw std::out_of_range("Error: Index is ou of bounds.");
+    if (aIndex < 0 || aIndex >= m_size) {
+        throw std::out_of_range("Error: Index is out of bounds.");
+    }
 
     return m_data[aIndex];
 }
 
+/// Gets total number of elements that can be stored in the Array. 
+/// @return Total number of elements that can be stored in the Array. 
 template <typename T>
 size_t Array<T>::getSize() const
 {
