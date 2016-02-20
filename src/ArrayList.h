@@ -14,9 +14,9 @@ class ArrayList
 
     public:
         ArrayList();
-        ArrayList(size_t aSize);
+        explicit ArrayList(size_t aSize);
         ArrayList(const ArrayList<T>& other);
-        ArrayList<T>& operator=(ArrayList<T> other);
+        ArrayList<T>& operator=(const ArrayList<T>& other);
         ~ArrayList();
         T& operator[](size_t aIndex);
         const T& operator[](size_t aIndex) const;
@@ -61,19 +61,23 @@ ArrayList<T>::ArrayList(const ArrayList<T>& other)
 }
 
 /// Assignment operator to replace the elements of this ArrayList with another's.
-///
+/// @param other Another ArrayList.
 template <typename T>
-ArrayList<T>& ArrayList<T>::operator=(ArrayList<T> other)
+ArrayList<T>& ArrayList<T>::operator=(const ArrayList<T>& other)
 {
-    m_size = other.m_size;
-    m_capacity = other.m_capacity;
-    m_data = new T[m_capacity]();
-    for (size_t i = 0; i < m_capacity; ++i) {
-        m_data[i] = other.m_data[i];
+    if (this != &other) {
+        m_size = other.m_size;
+        m_capacity = other.m_capacity;
+        m_data = new T[m_capacity]();
+        for (size_t i = 0; i < m_capacity; ++i) {
+            m_data[i] = other.m_data[i];
+        }
     }
     return *this;
 }
 
+/// Destructor.
+/// Deletes all elements.
 template <typename T>
 ArrayList<T>::~ArrayList() {
     if (m_data != nullptr) {
@@ -81,6 +85,11 @@ ArrayList<T>::~ArrayList() {
     }
 }
 
+/// Subscript operator overload to return non-const reference.
+/// Checks the range of the index queried and throws std::out_of_range if the index is out of bounds.
+///
+/// @param aIndex 0-based index of ArrayList element to return. 
+/// @return Non-const reference to Element contained at index aIndex.
 template <typename T>
 T& ArrayList<T>::operator[](size_t aIndex)
 {
@@ -90,6 +99,11 @@ T& ArrayList<T>::operator[](size_t aIndex)
     return m_data[aIndex];
 }
 
+/// Subscript operator overload to return const reference.
+/// Checks the range of the index queried and throws std::out_of_range if the index is out of bounds.
+///
+/// @param aIndex 0-based index of ArrayList element to return. 
+/// @return Const reference to Element contained at index aIndex.
 template <typename T>
 const T& ArrayList<T>::operator[](size_t aIndex) const
 {

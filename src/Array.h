@@ -10,9 +10,9 @@ class Array
         size_t m_size;
 
     public:
-        Array(size_t aSize);
+        explicit Array(size_t aSize);
         Array(const Array<T>& other);
-        Array<T>& operator=(Array<T> other);
+        Array<T>& operator=(const Array<T>& other);
         ~Array();
         T& operator[](size_t aIndex);
         size_t getSize() const;
@@ -47,16 +47,19 @@ Array<T>::Array(const Array<T>& other)
 /// @param other Another array from which we will copy the elements and size.
 /// Original elements of this Array will be deleted.
 template <typename T>
-Array<T>& Array<T>::operator=(Array<T> other)
+Array<T>& Array<T>::operator=(const Array<T>& other)
 {
-    m_size = other.m_size;
-    if (m_data != nullptr) {
-        delete[] m_data;
+    if (this != &other) {
+        m_size = other.m_size;
+        if (m_data != nullptr) {
+            delete[] m_data;
+        }
+        m_data = new T[m_size]();
+        for (size_t i = 0; i < m_size; ++i) {
+            m_data[i] = other.m_data[i];
+        }
     }
-    m_data = new T[m_size]();
-    for (size_t i = 0; i < m_size; ++i) {
-        m_data[i] = other.m_data[i];
-    }
+   
     return *this;
 }
 
@@ -72,13 +75,12 @@ Array<T>::~Array()
 
 /// Subscript operator overload.
 /// Checks the range of the index queried and throws std::out_of_range if the index is out of bounds.
-///
-/// @param aIndex 0-based index of array element to return. 
+/// @param aIndex 0-based index of Array element to return. 
 /// @return Element contained at index aIndex.
 template <typename T>
 T& Array<T>::operator[](size_t aIndex)
 {
-    if (aIndex < 0 || aIndex >= m_size) {
+    if (aIndex >= m_size) {
         throw std::out_of_range("Error: Index is out of bounds.");
     }
 

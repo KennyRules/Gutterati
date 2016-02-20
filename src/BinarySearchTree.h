@@ -1,9 +1,20 @@
 #pragma once
 
+/// BinarySearchTree implements a standard binary search tree. that 
+/// BinarySearchTree does not guarantee the tree will be balanced, but does guarantee the traditional
+/// property that for any Node N, its value is greater than its left child and less than its right child.
 template <typename T>
 class BinarySearchTree
 {
-    protected:
+    public:
+        BinarySearchTree();
+        ~BinarySearchTree();
+        void insert(T aValue);
+        void remove(T aValue);
+        const T* find(T aValue);
+        size_t getSize() const;
+
+    private:
         struct TreeNode
         {
             T value;
@@ -12,29 +23,28 @@ class BinarySearchTree
         };
         TreeNode* m_root = nullptr;
         size_t m_size = 0;
-
-    public:
-        BinarySearchTree();
-        ~BinarySearchTree();
-        void insert(T aValue);
-        void remove(T aValue);
-        void clear();
-        const T* find(T aValue);
-        size_t getSize() const;
 };
 
+/// Default Constructor.
+/// Does nothing.
 template <typename T>
 BinarySearchTree<T>::BinarySearchTree()
 {
-
+    // Do nothing.
 }
 
+/// Destructor.
+/// Deletes all elements stored inside the BinarySearchTree.
 template <typename T>
 BinarySearchTree<T>::~BinarySearchTree()
 {
-
+    // TO-DO: Implement.
 }
 
+/// Inserts a new element into the BinarySearchTree.
+/// In the worst case, this operation will take O(n) time, where n is the total amount of elements,
+/// because BinarySearchTree is not automatically height balanced.
+/// @param aValue Element to insert into the BinarySearchTree.
 template <typename T>
 void BinarySearchTree<T>::insert(T aValue)
 {
@@ -71,12 +81,13 @@ void BinarySearchTree<T>::insert(T aValue)
     m_size++;
 }
 
+/// Removes a element from the BinarySearchTree.
+/// In the worst case, this operation will take O(n) time, where n is the total amount of elements,
+/// because BinarySearchTree is not automatically height balanced.
+/// @param aValue Element to remove from the BinarySearchTree.
 template <typename T>
 void BinarySearchTree<T>::remove(T aValue)
 {
-    if (aValue == 13) {
-        int a = 5;
-    }
     TreeNode* parentNode = nullptr;
     TreeNode* currentNode = m_root;
     while (currentNode != nullptr) {
@@ -154,12 +165,11 @@ void BinarySearchTree<T>::remove(T aValue)
     delete nodeToDelete;
 }
 
-template <typename T>
-void BinarySearchTree<T>::clear()
-{
-
-}
-
+/// Finds an element in the BinarySearchTree.
+/// In the worst case, this operation will take O(n) time, where n is the total amount of elements,
+/// because BinarySearchTree is not automatically height balanced.
+/// @param aValue Element to locate in the BinarySearchTree.
+/// @return A const pointer to that element, or nullptr if it cannot be found.
 template <typename T>
 const T* BinarySearchTree<T>::find(T aValue)
 {
@@ -179,6 +189,8 @@ const T* BinarySearchTree<T>::find(T aValue)
     return nullptr;
 }
 
+/// Gets how many elements are currently contained in the BinarySearchTree.
+/// @return Total number of elements currently in the BinarySearchTree.
 template <typename T>
 size_t BinarySearchTree<T>::getSize() const
 {

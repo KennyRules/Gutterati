@@ -2,6 +2,7 @@
 
 #include "Heap.h"
 
+/// MinHeap implements the Heap data structure where the root of the Heap is the minimum element.
 template <typename T>
 class MinHeap : public Heap<T> {
     using Heap<T>::m_heap;
@@ -13,12 +14,18 @@ class MinHeap : public Heap<T> {
         T getMin();
 };
 
+/// Default constructor.
+/// Does nothing.
 template <typename T>
 MinHeap<T>::MinHeap()
 {
-    
+    // Do nothing.   
 }
 
+/// Inserts a new element into the MinHeap.
+/// Elements are inserted at the end of the heap and then sifted up, making the operation
+/// take O(log(n)) time, where n is the new total count of elements.
+/// @param aValue Element to insert into the MinHeap.
 template <typename T>
 void MinHeap<T>::insert(T aValue)
 {
@@ -33,6 +40,9 @@ void MinHeap<T>::insert(T aValue)
     }
 }
 
+/// Remove and return the minimum element in the MinHeap.
+/// Removal will take at most O(log(n)) time, where n is the total count of elements prior to deletion.
+/// @return The element with minimum value in the MinHeap.
 template <typename T>
 T MinHeap<T>::pop()
 {
@@ -64,6 +74,9 @@ T MinHeap<T>::pop()
     return minItem;
 }
 
+/// Gets the element at the top of the MinHeap.
+/// Operation is guaranteed to be O(1) time due to the minimum element always being the root.
+/// @return Element at the top of the MaxHeap.
 template <typename T>
 T MinHeap<T>::getMin()
 {

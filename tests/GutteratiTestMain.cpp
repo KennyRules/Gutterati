@@ -1,7 +1,6 @@
 /** 
  *  @file
  *  @brief Central hub for running Catch tests.
- *  TO-DO: Linkup to LinkedListTest.cpp
  **/
 
 #define CATCH_CONFIG_RUNNER

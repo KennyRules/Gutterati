@@ -1,10 +1,3 @@
-/** 
- *  @file 
- *  @brief Exercise a Singly Linked List
- *
- *  TO-DO: Further define 
- **/
-
 #include "../../src/SinglyLinkedList.h"
 #include "../../include/catch.hpp"
 
@@ -13,15 +6,15 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
     GIVEN("A empty Singly Linked List") {
         SinglyLinkedList<int> list;
 
-        REQUIRE(list.size() == 0);
+        REQUIRE(list.getSize() == 0);
 
         WHEN("Items are added") {
-            list.add(0);
-            list.add(1);
-            list.add(2);
+            list.insert(0);
+            list.insert(1);
+            list.insert(2);
 
             THEN("The size increases") {
-                REQUIRE(list.size() == 3);
+                REQUIRE(list.getSize() == 3);
             }
         }
 
@@ -30,85 +23,85 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
             list.remove(1);
             list.remove(2);
             THEN("The list remains empty") {
-                REQUIRE(list.size() == 0);
+                REQUIRE(list.getSize() == 0);
             }
         }
     }
 
     GIVEN("A Singly Linked List with one element") {
         SinglyLinkedList<int> list;
-        list.add(5);
-        REQUIRE(list.size() == 1);
+        list.insert(5);
+        REQUIRE(list.getSize() == 1);
 
         WHEN("The item is removed") {
             list.remove(5);
             THEN("The list is empty") {
-                REQUIRE(list.size() == 0);
+                REQUIRE(list.getSize() == 0);
             }
         }
 
         WHEN("A different item is quieried to be removed") {
             list.remove(3);
             THEN("The list remains the same size") {
-                REQUIRE(list.size() == 1);
+                REQUIRE(list.getSize() == 1);
             }
         }
     }
 
     GIVEN("A Singly Linked List with two elements") {
         SinglyLinkedList<int> list;
-        list.add(7);
-        list.add(11);
-        REQUIRE(list.size() == 2);
+        list.insert(7);
+        list.insert(11);
+        REQUIRE(list.getSize() == 2);
 
         WHEN("The head is removed") {
             list.remove(7);
             THEN("The list has the remaining element") {
-                REQUIRE(list.size() == 1);
-                REQUIRE(list.find(11) == 11);
+                REQUIRE(list.getSize() == 1);
+                REQUIRE(*list.find(11) == 11);
             }
         }
 
         WHEN("The tail is removed") {
             list.remove(11);
             THEN("The list has the remaining element") {
-                REQUIRE(list.size() == 1);
-                REQUIRE(list.find(7) == 7);
+                REQUIRE(list.getSize() == 1);
+                REQUIRE(*list.find(7) == 7);
             }
         }
     }
 
     GIVEN( "A Singly Linked List with three elements" ) {
         SinglyLinkedList<int> list;
-        list.add(7);
-        list.add(8);
-        list.add(9);
-        REQUIRE(list.size() == 3);
+        list.insert(7);
+        list.insert(8);
+        list.insert(9);
+        REQUIRE(list.getSize() == 3);
 
         WHEN( "The head is removed" ) {
             list.remove(7);
             THEN( "The list has the remaining elements" ) {
-                REQUIRE(list.size() == 2);
-                REQUIRE(list.find(8) == 8);
-                REQUIRE(list.find(9) == 9);
+                REQUIRE(list.getSize() == 2);
+                REQUIRE(*list.find(8) == 8);
+                REQUIRE(*list.find(9) == 9);
             }
         }
 
         WHEN( "The tail is removed" ) {
             list.remove(9);
             THEN("The list has the remaining elements") {
-                REQUIRE(list.size() == 2);
-                REQUIRE(list.find(7) == 7);
-                REQUIRE(list.find(8) == 8);
+                REQUIRE(list.getSize() == 2);
+                REQUIRE(*list.find(7) == 7);
+                REQUIRE(*list.find(8) == 8);
             }
         }
 
         WHEN( "The middle is removed" ) {
             list.remove(8);
             THEN( "The list has the remaining elements" ) {
-                REQUIRE(list.size() == 2);
-                REQUIRE(list.find(7) == 7);
-                REQUIRE(list.find(9) == 9);
+                REQUIRE(list.getSize() == 2);
+                REQUIRE(*list.find(7) == 7);
+                REQUIRE(*list.find(9) == 9);
             }
         }
     }

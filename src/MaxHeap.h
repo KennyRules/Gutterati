@@ -2,8 +2,10 @@
 
 #include "Heap.h"
 
+/// MaxHeap implements the Heap data structure where the root of the Heap is the maximum element.
 template <typename T>
-class MaxHeap : public Heap<T> {
+class MaxHeap : public Heap<T>
+{
     using Heap<T>::m_heap;
 
     public:
@@ -13,12 +15,18 @@ class MaxHeap : public Heap<T> {
         T getMax();
 };
 
+/// Default constructor.
+/// Does nothing.
 template <typename T>
 MaxHeap<T>::MaxHeap()
 {
-
+    // Do nothing.
 }
 
+/// Inserts a new element into the MaxHeap.
+/// Elements are inserted at the end of the heap and then sifted up, making the operation
+/// take O(log(n)) time, where n is the new total count of elements.
+/// @param aValue Element to insert into the MaxHeap.
 template <typename T>
 void MaxHeap<T>::insert(T aValue)
 {
@@ -33,6 +41,9 @@ void MaxHeap<T>::insert(T aValue)
     }
 }
 
+/// Remove and return the maximum element in the MaxHeap.
+/// Removal will take at most O(log(n)) time, where n is the total count of elements prior to deletion.
+/// @return The element with maximum value in the MaxHeap.
 template <typename T>
 T MaxHeap<T>::pop()
 {
@@ -64,6 +75,9 @@ T MaxHeap<T>::pop()
     return MaxItem;
 }
 
+/// Gets the element at the top of the MaxHeap.
+/// Operation is guaranteed to be O(1) time due to the maximum element always being the root.
+/// @return Element at the top of the MaxHeap.
 template <typename T>
 T MaxHeap<T>::getMax()
 {
