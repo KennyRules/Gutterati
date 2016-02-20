@@ -1,173 +1,162 @@
 language: cpp
-sudo: false
+sudo: true
 
 cache:
   ccache: true
   directories:
-    - $HOME/.ccache
+  - "$HOME/.ccache"
 
 env:
   global:
-    - USE_CCACHE=1
-    - CCACHE_COMPRESS=1
-    - CCACHE_MAXSIZE=200M
-    - CCACHE_CPP2=1
+  - USE_CCACHE=1
+  - CCACHE_COMPRESS=1
+  - CCACHE_MAXSIZE=200M
+  - CCACHE_CPP2=1
 
-# Build matrix taken from https://github.com/philsquared/Catch
 matrix:
   include:
-    # 1/ Linux Clang Builds
-    - os: linux
-      compiler: clang
-      addons: &clang35
-        apt:
-          sources: ['llvm-toolchain-precise-3.5', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.5']
-      env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: clang
-      addons: *clang35
-      env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Debug'
-
-
-    - os: linux
-      compiler: clang
-      addons: &clang36
-        apt:
-          sources: ['llvm-toolchain-precise-3.6', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.6']
-      env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: clang
-      addons: *clang36
-      env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Debug'
-
-
-    - os: linux
-      compiler: clang
-      addons: &clang37
-        apt:
-          sources: ['llvm-toolchain-precise-3.7', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.7']
-      env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: clang
-      addons: *clang37
-      env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Debug'
-
-
-    - os: linux
-      compiler: clang
-      addons: &clang38
-        apt:
-          sources: ['llvm-toolchain-precise', 'ubuntu-toolchain-r-test']
-          packages: ['clang-3.8']
-      env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: clang
-      addons: *clang38
-      env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Debug'
-
-
-    # 2/ Linux GCC Builds
-    - os: linux
-      compiler: gcc
-      addons: &gcc48
-        apt:
-         sources: ['ubuntu-toolchain-r-test']
-         packages: ['g++-4.8']
-      env: COMPILER='ccache g++-4.8' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc48
-      env: COMPILER='ccache g++-4.8' BUILD_TYPE='Debug'
-
-
-    - os: linux
-      compiler: gcc
-      addons: &gcc49
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-4.9']
-      env: COMPILER='ccache g++-4.9' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc49
-      env: COMPILER='ccache g++-4.9' BUILD_TYPE='Debug'
-
-
-    - os: linux
-      compiler: gcc
-      addons: &gcc5
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-5']
-      env: COMPILER='ccache g++-5' BUILD_TYPE='Release'
-
-    - os: linux
-      compiler: gcc
-      addons: *gcc5
-      env: COMPILER='ccache g++-5' BUILD_TYPE='Debug'
-
-
-    # 3/ OSX Clang Builds
-    - os: osx
-      osx_image: xcode6.4
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
-
-    - os: osx
-      osx_image: xcode6.4
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Release'
-
-
-    - os: osx
-      osx_image: xcode7
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
-
-    - os: osx
-      osx_image: xcode7
-      compiler: clang
-      env: COMPILER='ccache clang++' BUILD_TYPE='Release'
-
+  - os: linux
+    compiler: clang
+    addons: &1
+      apt:
+        sources:
+        - llvm-toolchain-precise-3.5
+        - ubuntu-toolchain-r-test
+        packages:
+        - clang-3.5
+    env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Release'
+  - os: linux
+    compiler: clang
+    addons: *1
+    env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Debug'
+  - os: linux
+    compiler: clang
+    addons: &2
+      apt:
+        sources:
+        - llvm-toolchain-precise-3.6
+        - ubuntu-toolchain-r-test
+        packages:
+        - clang-3.6
+    env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Release'
+  - os: linux
+    compiler: clang
+    addons: *2
+    env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Debug'
+  - os: linux
+    compiler: clang
+    addons: &3
+      apt:
+        sources:
+        - llvm-toolchain-precise-3.7
+        - ubuntu-toolchain-r-test
+        packages:
+        - clang-3.7
+    env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Release'
+  - os: linux
+    compiler: clang
+    addons: *3
+    env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Debug'
+  - os: linux
+    compiler: clang
+    addons: &4
+      apt:
+        sources:
+        - llvm-toolchain-precise
+        - ubuntu-toolchain-r-test
+        packages:
+        - clang-3.8
+    env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Release'
+  - os: linux
+    compiler: clang
+    addons: *4
+    env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Debug'
+  - os: linux
+    compiler: gcc
+    addons: &5
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-4.8
+    env: COMPILER='ccache g++-4.8' BUILD_TYPE='Release'
+  - os: linux
+    compiler: gcc
+    addons: *5
+    env: COMPILER='ccache g++-4.8' BUILD_TYPE='Debug'
+  - os: linux
+    compiler: gcc
+    addons: &6
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-4.9
+    env: COMPILER='ccache g++-4.9' BUILD_TYPE='Release'
+  - os: linux
+    compiler: gcc
+    addons: *6
+    env: COMPILER='ccache g++-4.9' BUILD_TYPE='Debug'
+  - os: linux
+    compiler: gcc
+    addons: &7
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-5
+    env: COMPILER='ccache g++-5' BUILD_TYPE='Release'
+  - os: linux
+    compiler: gcc
+    addons: *7
+    env: COMPILER='ccache g++-5' BUILD_TYPE='Debug'
+  - os: osx
+    osx_image: xcode6.4
+    compiler: clang
+    env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
+  - os: osx
+    osx_image: xcode6.4
+    compiler: clang
+    env: COMPILER='ccache clang++' BUILD_TYPE='Release'
+  - os: osx
+    osx_image: xcode7
+    compiler: clang
+    env: COMPILER='ccache clang++' BUILD_TYPE='Debug'
+  - os: osx
+    osx_image: xcode7
+    compiler: clang
+    env: COMPILER='ccache clang++' BUILD_TYPE='Release'
   allow_failures:
-    - os: osx
+  - os: osx
+
+before_install:
+- openssl aes-256-cbc -K $encrypted_0e3462f74f54_key -iv $encrypted_0e3462f74f54_iv
+  -in config/travisci_rsa.enc -out config/travisci_rsa -d
+- chmod 0600 config/travisci_rsa
+- cp config/travisci_rsa ~/.ssh/id_rsa
 
 install:
-  - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
-  - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
-
-  - |
-    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 
-      wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz
-      tar -xzf cmake-3.4.3-Linux-x86_64.tar.gz
-    elif [[ "${TRAVIS_OS_NAME}" == "osx" ]]; then
-      brew install cmake ccache
-    fi
+- DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
+- mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
+- "if [[ \"$TRAVIS_OS_NAME\" == \"linux\" ]]; then \n  wget --no-check-certificate
+  http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz\n  tar -xzf cmake-3.4.3-Linux-x86_64.tar.gz\nelif
+  [[ \"${TRAVIS_OS_NAME}\" == \"osx\" ]]; then\n  brew install cmake ccache\nfi\n"
+- sudo apt-get install --yes doxygen graphviz
 
 before_script:
-  - export CXX=${COMPILER}
-  - |
-    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then 
-      export CMAKE_DIR=$(pwd)/cmake-3.4.3-Linux-x86_64/bin
-      export PATH=${CMAKE_DIR}:${PATH}
-    fi
-
-  - cd ${TRAVIS_BUILD_DIR}
-  - cmake . -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
-  - cd build
+- export CXX=${COMPILER}
+- "if [[ \"$TRAVIS_OS_NAME\" == \"linux\" ]]; then \n  export CMAKE_DIR=$(pwd)/cmake-3.4.3-Linux-x86_64/bin\n
+  \ export PATH=${CMAKE_DIR}:${PATH}\nfi\n"
+- cd ${TRAVIS_BUILD_DIR}
+- cmake . -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+- cd build
 
 script:
-  - make -j 2
-  - ctest -V -j 2
+- make -j 2
+- ctest -V -j 2
+
+after_success:
+- ./config/publish-doxygen
 
 notifications:
   email: false
