@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdexcept>
+
 /// LinkedList is an interface that provides default infrastructure
 /// for traditional linked list data structure implementations.
 template <typename T>
