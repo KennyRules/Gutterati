@@ -58,7 +58,7 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
             list.remove(7);
             THEN("The list has the remaining element") {
                 REQUIRE(list.getSize() == 1);
-                REQUIRE(*list.find(11) == 11);
+                REQUIRE(list.find(11) == 11);
             }
         }
 
@@ -66,7 +66,7 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
             list.remove(11);
             THEN("The list has the remaining element") {
                 REQUIRE(list.getSize() == 1);
-                REQUIRE(*list.find(7) == 7);
+                REQUIRE(list.find(7) == 7);
             }
         }
     }
@@ -82,8 +82,8 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
             list.remove(7);
             THEN( "The list has the remaining elements" ) {
                 REQUIRE(list.getSize() == 2);
-                REQUIRE(*list.find(8) == 8);
-                REQUIRE(*list.find(9) == 9);
+                REQUIRE(list.find(8) == 8);
+                REQUIRE(list.find(9) == 9);
             }
         }
 
@@ -91,8 +91,8 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
             list.remove(9);
             THEN("The list has the remaining elements") {
                 REQUIRE(list.getSize() == 2);
-                REQUIRE(*list.find(7) == 7);
-                REQUIRE(*list.find(8) == 8);
+                REQUIRE(list.find(7) == 7);
+                REQUIRE(list.find(8) == 8);
             }
         }
 
@@ -100,8 +100,8 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
             list.remove(8);
             THEN( "The list has the remaining elements" ) {
                 REQUIRE(list.getSize() == 2);
-                REQUIRE(*list.find(7) == 7);
-                REQUIRE(*list.find(9) == 9);
+                REQUIRE(list.find(7) == 7);
+                REQUIRE(list.find(9) == 9);
             }
         }
     }

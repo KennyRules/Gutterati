@@ -9,15 +9,15 @@ class SinglyLinkedList : public LinkedList<T>
     public:
         SinglyLinkedList();
 
-        void insert(const T& aValue);
-        void remove(const T& aValue);
-        const T* find(const T& aValue) const;
+        void insert(T aValue);
+        void remove(T aValue);
+        T find(T aValue) const;
         size_t getSize() const;
 
     private:
         struct Node
         {
-            const T& data;
+            T data;
             Node* next;
         };
         Node* m_head = nullptr;
@@ -35,7 +35,7 @@ SinglyLinkedList<T>::SinglyLinkedList() {
 /// Element is added as the new head of the list, providing fast insertion time.
 /// @param aValue Value to be added into the list.
 template <typename T>
-void SinglyLinkedList<T>::insert(const T& aValue)
+void SinglyLinkedList<T>::insert(T aValue)
 {
     Node* newNode = new Node{ aValue, nullptr };
     newNode->next = m_head;
@@ -46,7 +46,7 @@ void SinglyLinkedList<T>::insert(const T& aValue)
 /// Element will be deleted.
 /// @param aValue Value to be removed from the SinglyLinkedList.
 template <typename T>
-void SinglyLinkedList<T>::remove(const T& aValue)
+void SinglyLinkedList<T>::remove(T aValue)
 {
     Node* prevNode = nullptr;
     Node* currentNode = m_head;
@@ -75,16 +75,16 @@ void SinglyLinkedList<T>::remove(const T& aValue)
 /// @param aValue Value to find in the SinglyLinkedList.
 /// @return Const pointer to the element.
 template <typename T>
-const T* SinglyLinkedList<T>::find(const T& aValue) const
+T SinglyLinkedList<T>::find(T aValue) const
 {
     Node* currentNode = m_head;
     while (currentNode != nullptr) {
         if (currentNode->data == aValue) {
-            return &currentNode->data;
+            return currentNode->data;
         }
         currentNode = currentNode->next;
     }
-    return nullptr;
+    return -1;
 }
 
 /// Returns the size of the SinglyLinkedList, which is the total number of 
@@ -94,7 +94,7 @@ template <typename T>
 size_t SinglyLinkedList<T>::getSize() const
 {
     Node* currentNode = m_head;
-    int size = 0;
+    size_t size = 0;
     while (currentNode != nullptr) {
         size++;
         currentNode = currentNode->next;
