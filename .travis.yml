@@ -138,8 +138,8 @@ before_install:
 install:
 - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
 - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
-- "if [[ \"$TRAVIS_OS_NAME\" == \"linux\" ]]; then \n  wget --no-check-certificate
-  http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz\n  tar -xzf cmake-3.4.3-Linux-x86_64.tar.gz
+- "if [[ \"$TRAVIS_OS_NAME\" == \"linux\" ]]; then \n
+  wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz\n tar -xzf cmake-3.4.3-Linux-x86_64.tar.gz \n
   sudo apt-get install --yes doxygen graphviz \nelif
   [[ \"${TRAVIS_OS_NAME}\" == \"osx\" ]]; then\n brew install cmake ccache doxygen graphviz\nfi\n"
 
