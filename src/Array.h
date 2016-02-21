@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdio.h>
 #include "GutteratiContainer.h"
 
 /// Array is a thin wrapper for a fixed-size array of elements.
