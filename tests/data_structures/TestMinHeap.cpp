@@ -1,5 +1,5 @@
-#include "../../include/catch.hpp"
-#include "../../src/MinHeap.h"
+#include "catch.hpp"
+#include "MinHeap.h"
 
 SCENARIO("A MinHeap can have elements added", "[MinHeap]") {
     
@@ -95,10 +95,10 @@ SCENARIO("A MinHeap can have the minimum element extracted", "[MinHeap]") {
 
         WHEN("The elements are popped off one by one") {
             THEN("They will be popped off smallest to biggest") {
-                for (int i = 0; i < 1000; ++i) {
+                for (size_t i = 0; i < 1000; ++i) {
                     REQUIRE(aMinHeap.getSize() == 1000 - i);
-                    REQUIRE(aMinHeap.getMin() == i);
-                    REQUIRE(aMinHeap.pop() == i);
+                    REQUIRE(aMinHeap.getMin() == (int)i);
+                    REQUIRE(aMinHeap.pop() == (int)i);
                 }
             }
         }
@@ -112,9 +112,9 @@ SCENARIO("A MinHeap can have the minimum element extracted", "[MinHeap]") {
 
         WHEN("The elements are popped off one by one") {
             THEN("They will be popped off smallest to biggest") {
-                for (int i = 1; i <= 1000; ++i) {
+                for (size_t i = 1; i <= 1000; ++i) {
                     REQUIRE(aMinHeap.getSize() == 1000 - i + 1);
-                    REQUIRE(aMinHeap.pop() == i);
+                    REQUIRE(aMinHeap.pop() == (int)i);
                 }
             }
         }

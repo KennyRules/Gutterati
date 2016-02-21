@@ -4,7 +4,7 @@ project( Gutterati )
 
 set( Gutterati_VERSION_MAJOR 0 )
 set( Gutterati_VERSION_MINOR 1 )
-set( Gutterati_VERSION_PATCH 0 )
+set( Gutterati_VERSION_PATCH 1 )
 
 # set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib )
 # set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin )
@@ -12,9 +12,21 @@ set( Gutterati_VERSION_PATCH 0 )
 
 set( CMAKE_CXX_STANDARD 11 )
 
+if(MSVC)
+  	if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
+    	string(REGEX REPLACE "/W[0-4]" "/W4 /WX" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+  	else()
+    	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+  	endif()
+elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+  	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Werror")
+endif()
+
+
 set( GUTTERATI_DIR ${CMAKE_CURRENT_SOURCE_DIR} )
 
 include_directories(  ${GUTTERATI_DIR}/src )
+include_directories(  ${GUTTERATI_DIR}/include )
 
 file( GLOB Gutterati_SRC 
     "${GUTTERATI_DIR}/src/*.h"

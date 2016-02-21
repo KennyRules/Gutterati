@@ -1,5 +1,5 @@
-#include "../../include/catch.hpp"
-#include "../../src/Queue.h"
+#include "catch.hpp"
+#include "Queue.h"
 
 SCENARIO( "A Queue can have items enqueued", "[Queue]") {
 

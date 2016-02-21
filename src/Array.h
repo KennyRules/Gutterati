@@ -1,21 +1,22 @@
 #pragma once
 
+#include "GutteratiContainer.h"
+
 /// Array is a thin wrapper for a fixed-size array of elements.
 /// Array provides range checking for indexing operations and a getSize operation.
 template <typename T>
-class Array 
+class Array : public GutteratiContainer
 {
-    private:
-        T* m_data;
-        size_t m_size;
-
     public:
         explicit Array(size_t aSize);
         Array(const Array<T>& other);
         Array<T>& operator=(const Array<T>& other);
         ~Array();
         T& operator[](size_t aIndex);
-        size_t getSize() const;
+        virtual void clear() noexcept override;
+
+    private:
+        T* m_data;
 };
 
 /// Constructs a new Array.
@@ -87,10 +88,11 @@ T& Array<T>::operator[](size_t aIndex)
     return m_data[aIndex];
 }
 
-/// Gets total number of elements that can be stored in the Array. 
-/// @return Total number of elements that can be stored in the Array. 
+/// Clears the memory this Array is in charge of.
+/// Array can still be used after clearing.
+/// Does not delete the underlying array or alter the size of this Array.
 template <typename T>
-size_t Array<T>::getSize() const
+void Array<T>::clear() noexcept
 {
-    return m_size;
+    memset(&m_data[0], 0, m_size);
 }

@@ -1,11 +1,11 @@
 #pragma once
 
+#include "ArrayList.h"
+
 /// Heap is an abstract class that provides default infrastructure
 /// for traditional heap data structure implementations.
 /// Heap uses an ArrayList instead of a tree structure to store elements,
 /// and uses index math to effectively treat the ArrayList like a tree.
-#include "ArrayList.h"
-
 template <typename T>
 class Heap 
 {

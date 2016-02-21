@@ -1,5 +1,5 @@
-#include "../../include/catch.hpp"
-#include "../../src/Array.h"
+#include "catch.hpp"
+#include "Array.h"
 
 SCENARIO("An Array can hold elements in a contiguous block of memory", "[Array]") {
 
@@ -8,7 +8,7 @@ SCENARIO("An Array can hold elements in a contiguous block of memory", "[Array]"
 
         WHEN("The size is queried") {
             THEN("The size is 1") {
-                REQUIRE(anArray.getSize() == 1);
+                REQUIRE(anArray.getSize() == (size_t)1);
             }
         }
     }
@@ -24,7 +24,7 @@ SCENARIO("An Array can hold elements in a contiguous block of memory", "[Array]"
     GIVEN("A new Array with size of 10") {
         Array<int> anArray(10);
 
-        WHEN("Elements [0,9] are intiailly accessed") {
+        WHEN("Elements [0,9] are initially accessed") {
 
             THEN("They will all be 0") {
                 for (size_t i = 0; i < 10; ++i) {
@@ -32,11 +32,10 @@ SCENARIO("An Array can hold elements in a contiguous block of memory", "[Array]"
                 }
             }
         }
-        AND_WHEN("Elements below 0 or above 9 are accessed") {
+        AND_WHEN("Elements above 9 are accessed") {
 
             THEN("It will throw a error") {
-                REQUIRE_THROWS_AS(anArray[-1], std::out_of_range);
-                REQUIRE_THROWS_AS(anArray[10], std::out_of_range);
+                REQUIRE_THROWS_AS(anArray[10u], std::out_of_range);
             }
         }
         AND_WHEN("Elements in the array are assigned new values") {
@@ -45,12 +44,12 @@ SCENARIO("An Array can hold elements in a contiguous block of memory", "[Array]"
             }
 
             THEN("They will retain those new values assigned") {
-                for (size_t i = 0; i < 10; i++) {
-                    REQUIRE(anArray[i] == i + 5);
+                for (int i = 0; i < 10; i++) {
+                    REQUIRE(anArray[(size_t)i] == i + 5);
                 }
             }
         }
-        AND_WHEN("The size is quieried") {
+        AND_WHEN("The size is queried") {
 
             THEN("It will be 10") {
                 REQUIRE(anArray.getSize() == 10);

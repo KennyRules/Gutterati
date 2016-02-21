@@ -1,5 +1,5 @@
-#include "../../include/catch.hpp"
-#include "../../src/BinarySearchTree.h"
+#include "catch.hpp"
+#include "BinarySearchTree.h"
 
 #include <vector>
 SCENARIO("A BST can have its size queried", "[BST]") {

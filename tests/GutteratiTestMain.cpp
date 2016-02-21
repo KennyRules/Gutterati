@@ -5,7 +5,9 @@
 
 #define CATCH_CONFIG_RUNNER
 
-#include "../include/catch.hpp"
+#pragma warning(push, 0)
+#include "catch.hpp"
+#pragma warning(pop)
 
 /**
  * @brief Main method that will just run Catch.
