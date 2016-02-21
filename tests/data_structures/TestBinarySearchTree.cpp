@@ -325,13 +325,15 @@ SCENARIO("A larger BST can have its elements removed", "[BST]") {
     
     GIVEN("A BST with some elements") {
         BinarySearchTree<int> aBST;
-        //          20
-        //      /        \
-        //     10         30
-        //   /   \       /  \
-        //  5     15   25    35
-        //   \   /    /       \
-        //    6 13   22        37
+        /*
+                    20
+                /        \
+               10         30
+             /   \       /  \
+            5     15   25    35
+             \   /    /       \
+              6 13   22        37
+        */
         int values[] = { 20, 10, 30, 5, 15, 25, 35, 6, 13, 22, 37 };
         int badValues[] = { 1, 2, 3, 4, 7, 8, 9, 11, 12, 14, 16, 21, 23, 24, 26, 31, 34, 36, 38 };
         for (int value : values) {

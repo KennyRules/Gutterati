@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdio.h>
+#include <cstring>
 #include "GutteratiContainer.h"
 
 /// Array is a thin wrapper for a fixed-size array of elements.
@@ -95,5 +95,5 @@ T& Array<T>::operator[](size_t aIndex)
 template <typename T>
 void Array<T>::clear() noexcept
 {
-    memset(&m_data[0], 0, m_size);
+    std::memset(&m_data[0], 0, m_size);
 }

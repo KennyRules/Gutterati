@@ -104,4 +104,4 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
             }
         }
     }
-};
+}
