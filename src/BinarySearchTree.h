@@ -23,6 +23,7 @@ class BinarySearchTree
         };
         TreeNode* m_root = nullptr;
         size_t m_size = 0;
+        void deleteNode(TreeNode* aNode);
 };
 
 /// Default Constructor.
@@ -38,7 +39,20 @@ BinarySearchTree<T>::BinarySearchTree()
 template <typename T>
 BinarySearchTree<T>::~BinarySearchTree()
 {
-    // TO-DO: Implement.
+    deleteNode(m_root);
+}
+
+/// Helper function to delete a node and its children.
+/// Will completely wipe out the subtree rooted at aNode.
+/// @param aNode Root of the subtree to delete.
+template <typename T>
+void BinarySearchTree<T>::deleteNode(TreeNode* aNode)
+{
+    if (aNode != nullptr) {
+        deleteNode(aNode->left);
+        deleteNode(aNode->right);
+        delete aNode;
+    }
 }
 
 /// Inserts a new element into the BinarySearchTree.

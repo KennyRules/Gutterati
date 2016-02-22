@@ -9,6 +9,12 @@
 #include "catch.hpp"
 #pragma warning(pop)
 
+#ifdef _MSC_VER
+// Uses Visual Leak Detector for Visual Studio to help debugging.
+// Obtained via https://vld.codeplex.com/.
+#include <vld.h>
+#endif
+
 /**
  * @brief Main method that will just run Catch.
  * 

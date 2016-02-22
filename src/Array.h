@@ -25,7 +25,7 @@ class Array : public GutteratiContainer
 template <typename T>
 Array<T>::Array(size_t aSize) 
 {
-    if (aSize <= 0) {
+    if (aSize == 0) {
         throw std::invalid_argument("Error: Size for Array must be greater than 0");
     }
     m_size = aSize;
@@ -95,5 +95,5 @@ T& Array<T>::operator[](size_t aIndex)
 template <typename T>
 void Array<T>::clear() noexcept
 {
-    std::memset(&m_data[0], 0, m_size);
+    std::memset(&m_data[0], 0, sizeof(T) * m_size);
 }

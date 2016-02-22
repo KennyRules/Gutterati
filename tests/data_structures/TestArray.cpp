@@ -94,3 +94,23 @@ SCENARIO("An Array can hold elements in a contiguous block of memory", "[Array]"
         }
     }
 }
+
+SCENARIO("An Array can have its elements cleared", "[Array]") {
+    
+    GIVEN("An Array with some elements") {
+        Array<int*> anArray(10);
+        for (int i = 1; i < 10; ++i) {
+            anArray[(size_t)i - 1u] = new int(i);
+        }
+
+        WHEN("The Array is cleared") {
+            anArray.clear();
+
+            THEN("The elements will all be 0") {
+                for (size_t i = 0; i < anArray.getSize(); ++i) {
+                    REQUIRE(anArray[i] == 0);
+                }
+            }
+        }
+    }
+}
