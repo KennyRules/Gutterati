@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cstring>
 #include "GutteratiContainer.h"
 
 /// Array is a thin wrapper for a fixed-size array of elements.
@@ -13,7 +12,9 @@ class Array : public GutteratiContainer
         Array(const Array<T>& other);
         Array<T>& operator=(const Array<T>& other);
         ~Array();
+        
         T& operator[](size_t aIndex);
+
         virtual void clear() noexcept override;
 
     private:
@@ -89,11 +90,11 @@ T& Array<T>::operator[](size_t aIndex)
     return m_data[aIndex];
 }
 
-/// Clears the memory this Array is in charge of.
-/// Array can still be used after clearing.
-/// Does not delete the underlying array or alter the size of this Array.
+/// Clears the content of this Array.
+/// Will allocate a new block of memory that is the same size.
 template <typename T>
 void Array<T>::clear() noexcept
 {
-    std::memset(&m_data[0], 0, sizeof(T) * m_size);
+    delete[] m_data;
+    m_data = new T[m_size]();
 }

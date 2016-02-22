@@ -98,9 +98,9 @@ SCENARIO("An Array can hold elements in a contiguous block of memory", "[Array]"
 SCENARIO("An Array can have its elements cleared", "[Array]") {
     
     GIVEN("An Array with some elements") {
-        Array<int*> anArray(10);
+        Array<int> anArray(10);
         for (int i = 1; i < 10; ++i) {
-            anArray[(size_t)i - 1u] = new int(i);
+            anArray[(size_t)i - 1u] = i;
         }
 
         WHEN("The Array is cleared") {
