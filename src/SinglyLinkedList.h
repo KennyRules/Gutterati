@@ -57,7 +57,7 @@ void SinglyLinkedList<T>::insert(T aValue)
         m_head = newNode;
     }
     m_tail = newNode;
-    m_size++;
+    this->m_size++;
 }
 
 /// Remove a element from the SinglLinkedList.
@@ -82,7 +82,7 @@ void SinglyLinkedList<T>::remove(T aValue)
             }
             currentNode->next = nullptr;
             delete currentNode;
-            m_size--;
+            this->m_size--;
             return;
         }
         else {
@@ -103,7 +103,7 @@ void SinglyLinkedList<T>::clear() noexcept
         currentNode = currentNode->next;
         delete nodeToDelete;
     }
-    m_size = 0;
+    this->m_size = 0;
     m_head = m_tail = nullptr;
 }
 
