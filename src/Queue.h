@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdexcept>
+#include "SinglyLinkedList.h"
 
 /// Queue implements a basic First-In First-Out data structure.
 template <typename T>
@@ -15,14 +15,13 @@ class Queue
         T dequeue();
 
     private:
+        SinglyLinkedList<T> m_data;
         struct QueueNode
         {
             T data;
             QueueNode* next;
         };
 
-        QueueNode* m_front = nullptr;
-        QueueNode* m_back = nullptr;
         size_t m_size = 0;
 };
 
@@ -40,11 +39,11 @@ Queue<T>::Queue()
 template <class T>
 T Queue<T>::peek() const
 {
-    if (m_front == nullptr) {
+    if (m_data.isEmpty()) {
         throw std::range_error("Error: Queue is empty.");
     }
 
-    return m_front->data;
+    return m_data.getHead();
 }
 
 /// Returns the size of the Queue, which is the total number of 
@@ -70,15 +69,7 @@ bool Queue<T>::isEmpty() const
 template <class T>
 void Queue<T>::enqueue(T aValue)
 {
-    if (m_front == nullptr) {
-        m_front = new QueueNode{ aValue, nullptr };
-        m_back = m_front;
-    }
-    else {
-        auto newNode = new QueueNode{ aValue, nullptr };
-        m_back->next = newNode;
-        m_back = newNode;
-    }
+    m_data.insert(aValue);
     m_size++;
 }
 
@@ -88,23 +79,12 @@ void Queue<T>::enqueue(T aValue)
 template <class T>
 T Queue<T>::dequeue()
 {
-    if (m_front == nullptr) {
+    if (m_data.isEmpty()) {
         throw std::range_error("Error: Queue is empty.");
     }
 
-    T returnValue = m_front->data;
-
-    if (m_front == m_back) {
-        delete m_front;
-        m_front = nullptr;
-        m_back = nullptr;
-    }
-    else {
-        auto nodeToDelete = m_front;
-        m_front = m_front->next;
-        delete nodeToDelete;
-    }
-
+    T returnValue = m_data.getHead();
+    m_data.remove(returnValue);
     m_size--;
     return returnValue;
 }

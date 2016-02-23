@@ -1,5 +1,5 @@
-#include "../../include/catch.hpp"
-#include "../../src/MaxHeap.h"
+#include "catch.hpp"
+#include "MaxHeap.h"
 
 SCENARIO("A MaxHeap can have elements added", "[MaxHeap]") {
 
@@ -95,10 +95,10 @@ SCENARIO("A MaxHeap can have the maximum element extracted", "[MaxHeap]") {
 
         WHEN("The elements are popped off one by one") {
             THEN("They will be popped off biggest to smallest") {
-                for (int i = 1000; i >= 1; --i) {
+                for (size_t i = 1000; i >= 1; --i) {
                     REQUIRE(aMaxHeap.getSize() == i);
-                    REQUIRE(aMaxHeap.getMax() == i);
-                    REQUIRE(aMaxHeap.pop() == i);
+                    REQUIRE(aMaxHeap.getMax() == (int)i);
+                    REQUIRE(aMaxHeap.pop() == (int)i);
                 }
             }
         }
@@ -112,9 +112,9 @@ SCENARIO("A MaxHeap can have the maximum element extracted", "[MaxHeap]") {
 
         WHEN("The elements are popped off one by one") {
             THEN("They will be popped off biggest to smallest") {
-                for (int i = 1000; i >= 1; --i) {
+                for (size_t i = 1000; i >= 1; --i) {
                     REQUIRE(aMaxHeap.getSize() == i);
-                    REQUIRE(aMaxHeap.pop() == i);
+                    REQUIRE(aMaxHeap.pop() == (int)i);
                 }
             }
         }

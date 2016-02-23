@@ -1,5 +1,5 @@
-#include "../../include/catch.hpp"
-#include "../../src/ArrayList.h"
+#include "catch.hpp"
+#include "ArrayList.h"
 
 SCENARIO("An ArrayList can hold elements in a contiguous block of memory", "[ArrayList]") {
 
@@ -24,7 +24,7 @@ SCENARIO("An ArrayList can hold elements in a contiguous block of memory", "[Arr
     GIVEN("A new ArrayList with size of 10") {
         ArrayList<int> anArrayList(10);
 
-        WHEN("Elements [0,9] are intiailly accessed") {
+        WHEN("Elements [0,9] are initially accessed") {
 
             THEN("They will all be 0") {
                 for (size_t i = 0; i < 10; ++i) {
@@ -32,10 +32,9 @@ SCENARIO("An ArrayList can hold elements in a contiguous block of memory", "[Arr
                 }
             }
         }
-        AND_WHEN("Elements below 0 or above 9 are accessed") {
+        AND_WHEN("Elements above 9 are accessed") {
 
             THEN("It will throw a error") {
-                REQUIRE_THROWS_AS(anArrayList[-1], std::out_of_range);
                 REQUIRE_THROWS_AS(anArrayList[10], std::out_of_range);
             }
         }
@@ -45,12 +44,12 @@ SCENARIO("An ArrayList can hold elements in a contiguous block of memory", "[Arr
             }
 
             THEN("They will retain those new values assigned") {
-                for (size_t i = 0; i < 10; ++i) {
-                    REQUIRE(anArrayList[i] == i + 5);
+                for (int i = 0; i < 10; ++i) {
+                    REQUIRE(anArrayList[(size_t)i] == i + 5);
                 }
             }
         }
-        AND_WHEN("The size is quieried") {
+        AND_WHEN("The size is queried") {
 
             THEN("It will be 10") {
                 REQUIRE(anArrayList.getSize() == 10);

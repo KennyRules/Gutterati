@@ -1,5 +1,5 @@
-#include "../../src/SinglyLinkedList.h"
-#include "../../include/catch.hpp"
+#include "SinglyLinkedList.h"
+#include "catch.hpp"
 
 SCENARIO("A Singly Linked List can have items added and removed from it", "[SingleLinkedList]")
 {
@@ -12,7 +12,6 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
             list.insert(0);
             list.insert(1);
             list.insert(2);
-
             THEN("The size increases") {
                 REQUIRE(list.getSize() == 3);
             }
@@ -105,4 +104,4 @@ SCENARIO("A Singly Linked List can have items added and removed from it", "[Sing
             }
         }
     }
-};
+}

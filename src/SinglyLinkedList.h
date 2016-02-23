@@ -8,11 +8,15 @@ class SinglyLinkedList : public LinkedList<T>
 {
     public:
         SinglyLinkedList();
+        ~SinglyLinkedList();
 
         void insert(T aValue);
         void remove(T aValue);
+        void clear() noexcept override;
+
+        T getHead() const;
+        T getTail() const;
         T find(T aValue) const;
-        size_t getSize() const;
 
     private:
         struct Node
@@ -21,25 +25,39 @@ class SinglyLinkedList : public LinkedList<T>
             Node* next;
         };
         Node* m_head = nullptr;
+        Node* m_tail = nullptr;
 };
 
-
 /// Default constructor.
-/// SinglyLinkedList will be empty with a null head.
+/// SinglyLinkedList will be empty with a null head and tail.
 template <typename T>
 SinglyLinkedList<T>::SinglyLinkedList() {
     // Do nothing.
 }
 
+/// Destructor.
+/// Deletes all elements in the SinglyLinkedList.
+template <typename T>
+SinglyLinkedList<T>::~SinglyLinkedList()
+{
+    this->clear();
+}
+
 /// Add a new element to the SinglyLinkedList.
-/// Element is added as the new head of the list, providing fast insertion time.
+/// Element is added to the tail of the list. This operation is guaranteed to take constant time.
 /// @param aValue Value to be added into the list.
 template <typename T>
 void SinglyLinkedList<T>::insert(T aValue)
 {
     Node* newNode = new Node{ aValue, nullptr };
-    newNode->next = m_head;
-    m_head = newNode;
+    if (m_tail != nullptr) {
+        m_tail->next = newNode;
+    }
+    else {
+        m_head = newNode;
+    }
+    m_tail = newNode;
+    this->m_size++;
 }
 
 /// Remove a element from the SinglLinkedList.
@@ -59,8 +77,12 @@ void SinglyLinkedList<T>::remove(T aValue)
             else {
                 m_head = m_head->next;
             }
+            if (m_head == nullptr || m_tail == currentNode) {
+                m_tail = nullptr;
+            }
             currentNode->next = nullptr;
             delete currentNode;
+            this->m_size--;
             return;
         }
         else {
@@ -68,6 +90,41 @@ void SinglyLinkedList<T>::remove(T aValue)
             currentNode = currentNode->next;
         }
     }
+}
+
+/// Removes all elements from the list.
+/// This operation will delete the elements and set the size to 0.
+template <typename T>
+void SinglyLinkedList<T>::clear() noexcept
+{
+    Node* currentNode = m_head;
+    while (currentNode != nullptr) {
+        Node* nodeToDelete = currentNode;
+        currentNode = currentNode->next;
+        delete nodeToDelete;
+    }
+    this->m_size = 0;
+    m_head = m_tail = nullptr;
+}
+
+/// Get the element at the head of the list.
+/// The front element will always be the oldest element inserted, beneficial
+/// for FIFO data structures like the Queue.
+/// @return Element at the head5 of the SinglyLinkedList.
+template <typename T>
+T SinglyLinkedList<T>::getHead() const
+{
+    return m_head->data;
+}
+
+/// Get the element at the tail of the list.
+/// The back element will always be the most recently inserted, which is beneficial
+/// for LIFO data structures like the Stack.
+/// @return Element at the tail of the SinglyLinkedList.
+template <typename T>
+T SinglyLinkedList<T>::getTail() const
+{
+    return m_tail->data;
 }
 
 /// Finds a element in the SinglyLinkedList.
@@ -85,19 +142,4 @@ T SinglyLinkedList<T>::find(T aValue) const
         currentNode = currentNode->next;
     }
     return -1;
-}
-
-/// Returns the size of the SinglyLinkedList, which is the total number of 
-/// elements currently inserted.
-/// @return Current size of the SinglyLinkedList.
-template <typename T>
-size_t SinglyLinkedList<T>::getSize() const
-{
-    Node* currentNode = m_head;
-    size_t size = 0;
-    while (currentNode != nullptr) {
-        size++;
-        currentNode = currentNode->next;
-    }
-    return size;
 }
