@@ -1,4 +1,4 @@
-# FAQ {#faq}
+# FAQ
 
 ## What is this?
 Gutterati is a C++ data structure library, with a focus on simplicity, speed, and modern C++ features where applicable. 
