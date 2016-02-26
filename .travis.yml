@@ -13,6 +13,9 @@ env:
   - CCACHE_MAXSIZE=200M
   - CCACHE_CPP2=1
 
+addons:
+  ssh_known_hosts: git.github.com
+
 matrix:
   include:
   - os: linux

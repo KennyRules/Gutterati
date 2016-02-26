@@ -6,7 +6,6 @@ CHANGESET=$(git rev-parse --verify HEAD)
 
 rm -rf ${HTML_PATH}
 mkdir -p ${HTML_PATH}
-ssh-keyscan <git@github.com> >> ~/.ssh/known_hosts
 git clone -b gh-pages "${REPO_PATH}" --single-branch ${HTML_PATH}
 
 cd ${HTML_PATH}
