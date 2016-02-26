@@ -149,14 +149,15 @@ before_script:
   \ export PATH=${CMAKE_DIR}:${PATH}\nfi\n"
 - cd ${TRAVIS_BUILD_DIR}
 - cmake . -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
-- cd build
 
 script:
+- cd build
 - make -j 2
 - ctest -V -j 2
+- cd -
 
 after_success:
-- ./config/publish-doxygen
+- ./config/publish-doxygen.sh
 
 notifications:
   email: false
