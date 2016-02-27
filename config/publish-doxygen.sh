@@ -1,6 +1,6 @@
 REPO_PATH=https://github.com/KennyRules/Gutterati.git
 HTML_PATH=build/doc/html
-COMMIT_USER="Documentation Builder"
+COMMIT_USER="KennyRules"
 COMMIT_EMAIL="drewd@code-phoenix.com"
 CHANGESET=$(git rev-parse --verify HEAD)
 
