@@ -158,6 +158,7 @@ script:
 - cd -
 
 after_success:
+- cat ~/.ssh/config
 - sudo bash config/publish-doxygen.sh
 
 notifications:
