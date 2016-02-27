@@ -13,9 +13,6 @@ env:
   - CCACHE_MAXSIZE=200M
   - CCACHE_CPP2=1
 
-addons:
-  ssh_known_hosts: git.github.com
-
 matrix:
   include:
   - os: linux
@@ -147,6 +144,7 @@ install:
   [[ \"${TRAVIS_OS_NAME}\" == \"osx\" ]]; then\n brew install cmake ccache doxygen graphviz\nfi\n"
 
 before_script:
+- echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - export CXX=${COMPILER}
 - "if [[ \"$TRAVIS_OS_NAME\" == \"linux\" ]]; then \n  export CMAKE_DIR=$(pwd)/cmake-3.4.3-Linux-x86_64/bin\n
   \ export PATH=${CMAKE_DIR}:${PATH}\nfi\n"
