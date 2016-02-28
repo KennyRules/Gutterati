@@ -11,10 +11,12 @@ COMMIT_USER="Documentation Builder"
 COMMIT_EMAIL="drewd@code-phoenix.com"
 CHANGESET=$(git rev-parse --verify HEAD)
 
+echo "Beginning git clone for deploy"
+pwd
 rm -rf ${HTML_PATH}
 mkdir -p ${HTML_PATH}
 git remote add gh-pages "${REPO_PATH}"
-git clone -b gh-pages "${REPO_PATH}" --single-branch ${HTML_PATH}
+git clone -b gh-pages "${REPO_PATH}" --single-branch ${HTML_PATH} --verbose
 
 cd ${HTML_PATH}
 git rm -rf .
