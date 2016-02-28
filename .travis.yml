@@ -4,7 +4,7 @@ sudo: true
 cache:
   ccache: true
   directories:
-  - "$HOME/.ccache"
+  - $HOME/.ccache
 
 env:
   global:
@@ -17,7 +17,7 @@ matrix:
   include:
   - os: linux
     compiler: clang
-    addons: &1
+    addons: &20526720
       apt:
         sources:
         - llvm-toolchain-precise-3.5
@@ -27,11 +27,11 @@ matrix:
     env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Release'
   - os: linux
     compiler: clang
-    addons: *1
+    addons: *20526720
     env: COMPILER='ccache clang++-3.5' BUILD_TYPE='Debug'
   - os: linux
     compiler: clang
-    addons: &2
+    addons: &20524100
       apt:
         sources:
         - llvm-toolchain-precise-3.6
@@ -41,11 +41,11 @@ matrix:
     env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Release'
   - os: linux
     compiler: clang
-    addons: *2
+    addons: *20524100
     env: COMPILER='ccache clang++-3.6' BUILD_TYPE='Debug'
   - os: linux
     compiler: clang
-    addons: &3
+    addons: &20522220
       apt:
         sources:
         - llvm-toolchain-precise-3.7
@@ -55,11 +55,11 @@ matrix:
     env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Release'
   - os: linux
     compiler: clang
-    addons: *3
+    addons: *20522220
     env: COMPILER='ccache clang++-3.7' BUILD_TYPE='Debug'
   - os: linux
     compiler: clang
-    addons: &4
+    addons: &20536700
       apt:
         sources:
         - llvm-toolchain-precise
@@ -69,11 +69,11 @@ matrix:
     env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Release'
   - os: linux
     compiler: clang
-    addons: *4
+    addons: *20536700
     env: COMPILER='ccache clang++-3.8' BUILD_TYPE='Debug'
   - os: linux
     compiler: gcc
-    addons: &5
+    addons: &20534100
       apt:
         sources:
         - ubuntu-toolchain-r-test
@@ -82,11 +82,11 @@ matrix:
     env: COMPILER='ccache g++-4.8' BUILD_TYPE='Release'
   - os: linux
     compiler: gcc
-    addons: *5
+    addons: *20534100
     env: COMPILER='ccache g++-4.8' BUILD_TYPE='Debug'
   - os: linux
     compiler: gcc
-    addons: &6
+    addons: &20532460
       apt:
         sources:
         - ubuntu-toolchain-r-test
@@ -95,11 +95,11 @@ matrix:
     env: COMPILER='ccache g++-4.9' BUILD_TYPE='Release'
   - os: linux
     compiler: gcc
-    addons: *6
+    addons: *20532460
     env: COMPILER='ccache g++-4.9' BUILD_TYPE='Debug'
   - os: linux
     compiler: gcc
-    addons: &7
+    addons: &20530240
       apt:
         sources:
         - ubuntu-toolchain-r-test
@@ -108,7 +108,7 @@ matrix:
     env: COMPILER='ccache g++-5' BUILD_TYPE='Release'
   - os: linux
     compiler: gcc
-    addons: *7
+    addons: *20530240
     env: COMPILER='ccache g++-5' BUILD_TYPE='Debug'
   - os: osx
     osx_image: xcode6.4
@@ -130,22 +130,22 @@ matrix:
   - os: osx
 
 before_install:
-- openssl aes-256-cbc -K $encrypted_dc9ab2986818_key -iv $encrypted_dc9ab2986818_iv
-  -in  config/travisci_rsa.enc -out config/travisci_rsa -d
+- openssl aes-256-cbc -K $encrypted_591a2533bcd2_key -iv $encrypted_591a2533bcd2_iv
+  -in config/travisci_rsa.enc -out config/travisci_rsa -d
 - chmod 0600 config/travisci_rsa
 - cp config/travisci_rsa ~/.ssh/id_rsa
 
 install:
 - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
 - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
-- "if [[ \"$TRAVIS_OS_NAME\" == \"linux\" ]]; then \n wget --no-check-certificate
+- ! "if [[ \"$TRAVIS_OS_NAME\" == \"linux\" ]]; then \n wget --no-check-certificate
   http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz\n tar -xzf cmake-3.4.3-Linux-x86_64.tar.gz
   \n sudo apt-get install --yes doxygen graphviz \nelif [[ \"${TRAVIS_OS_NAME}\" ==
   \"osx\" ]]; then\n brew install cmake ccache doxygen graphviz\nfi\n"
 
 before_script:
 - export CXX=${COMPILER}
-- "if [[ \"$TRAVIS_OS_NAME\" == \"linux\" ]]; then \n  export CMAKE_DIR=$(pwd)/cmake-3.4.3-Linux-x86_64/bin\n
+- ! "if [[ \"$TRAVIS_OS_NAME\" == \"linux\" ]]; then \n  export CMAKE_DIR=$(pwd)/cmake-3.4.3-Linux-x86_64/bin\n
   \ export PATH=${CMAKE_DIR}:${PATH}\nfi\n"
 - cd ${TRAVIS_BUILD_DIR}
 - cmake . -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
@@ -157,7 +157,7 @@ script:
 - cd -
 
 after_success:
-- "./config/publish-doxygen.sh"
+- ./config/publish-doxygen.sh
 
 notifications:
   email: false
