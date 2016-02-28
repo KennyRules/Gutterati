@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
-openssl aes-256-cbc -K $encrypted_591a2533bcd2_key -iv $encrypted_591a2533bcd2_iv -in config/travisci_rsa.enc -out config/travisci_rsa -d
-chmod 0600 config/travisci_rsa
-cp config/travisci_rsa ~/.ssh/id_rsa
+sudo openssl aes-256-cbc -K $encrypted_591a2533bcd2_key -iv $encrypted_591a2533bcd2_iv -in config/travisci_rsa.enc -out config/travisci_rsa -d
+sudo chmod 0600 config/travisci_rsa
+sudo cp config/travisci_rsa ~/.ssh/id_rsa
 
 REPO_PATH=git@github.com:KennyRules/Gutterati.git
 HTML_PATH=build/doc/html
