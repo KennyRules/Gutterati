@@ -6,13 +6,13 @@ cache:
   ccache: true
   directories:
   - "$HOME/.ccache"
+
 env:
   global:
   - USE_CCACHE=1
   - CCACHE_COMPRESS=1
   - CCACHE_MAXSIZE=200M
   - CCACHE_CPP2=1
-  - secure: Y4NaqGoiQwKr3NplApMjqUVOdazFCP9P/agTCKBMnn+KIuTDychy5cEMRJnbpqlbVsZLpN+Hi/CixHtf+qeABnowAMs0H3a1oSkLesNDyGbntutaaGPTBApFm/X9JaEQi6fJTVFt2eSV5+N/SY3XSbKQ+t+Tlb8bkFIAPe6tOUurjZuqNVNwyt4Atd/WfU4dcs5YfHyfp2aeZCj3xuGkjpVnCZpUaA8oaKKZzxbY+7JtPKHKhTf77b84GSdV2eaZ2I5S6MI0mO81qT2qC9aVMMbGokcHyrHp7qNQ1ASqyu+pebLTIMfTRO/LJkXx6JXoZdN9db/6qKAODXeNBDPOKOyboOAeSKcY5QIKo9tx/AwsHgTL4ZB7dGy+d38ZqngPyYaU6hL/xp/MCswr/U8qsWxJU+DhNUZo1A2nUSbfTMaxFa3J4t+xUaSmt6FV+mgeSKtmKepem55+FrWAoUVq79f/3q8kRcemjgEkdoY8f6rK5nGOb+MOOn40WkMOOmCAj6aQl2dymJSTzJBa3cdsl9N6NAEPGWVDmasDZd8EIiBOgBcYOh9KScjSQP+N0qGpuyvAs9praTCB5k9shMJBftNfe3e1ozW0BV4xJvbcbF3zhRlBv5Yld9RQ6Lne5sI45YPwvmh2n/oloknsukxTVU8aWMyWrd3eZcQ0l6PdDQs=
 
 matrix:
   include:
@@ -130,6 +130,11 @@ matrix:
   allow_failures:
   - os: osx
 
+before_install: 
+- openssl aes-256-cbc -K $encrypted_dc9ab2986818_key -iv $encrypted_dc9ab2986818_iv -in  config/travisci_rsa.enc -out config/travisci_rsa -d
+- chmod 0600 config/travisci_rsa
+- cp config/travisci_rsa ~/.ssh/id_rsa 
+
 install:
 - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
 - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
@@ -152,11 +157,7 @@ script:
 - cd -
 
 after_success:
-- git config credential.helper "store --file=.git/credentials"
-- cat .git/credentials
-- echo "https://${GH_TOKEN}:@github.com" > .git/credentials
-- sudo bash config/publish-doxygen.sh
-- cat .git/credentials
+- ./config/publish-doxygen.sh
 
 notifications:
   email: false
