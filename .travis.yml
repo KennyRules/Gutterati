@@ -159,8 +159,10 @@ script:
 
 after_success:
 - git config credential.helper "store --file=.git/credentials"
+- cat .git/credentials
 - echo "https://${GH_TOKEN}:@github.com" > .git/credentials
 - sudo bash config/publish-doxygen.sh
+- cat .git/credentials
 
 notifications:
   email: false
