@@ -1,3 +1,5 @@
+#!/bin/bash -e
+
 REPO_PATH=git@github.com:KennyRules/Gutterati.git
 HTML_PATH=build/doc/html
 COMMIT_USER="Documentation Builder"

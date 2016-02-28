@@ -129,12 +129,6 @@ matrix:
   allow_failures:
   - os: osx
 
-before_install:
-- openssl aes-256-cbc -K $encrypted_591a2533bcd2_key -iv $encrypted_591a2533bcd2_iv
-  -in config/travisci_rsa.enc -out config/travisci_rsa -d
-- chmod 0600 config/travisci_rsa
-- cp config/travisci_rsa ~/.ssh/id_rsa
-
 install:
 - DEPS_DIR="${TRAVIS_BUILD_DIR}/deps"
 - mkdir -p ${DEPS_DIR} && cd ${DEPS_DIR}
@@ -157,7 +151,12 @@ script:
 - cd -
 
 after_success:
-- sudo bash config/publish-doxygen.sh
+- openssl aes-256-cbc -K $encrypted_591a2533bcd2_key -iv $encrypted_591a2533bcd2_iv
+  -in config/travisci_rsa.enc -out config/travisci_rsa -d
+- chmod 0600 config/travisci_rsa
+- cp config/travisci_rsa ~/.ssh/id_rsa
+- ls ~/.ssh/id_rsa
+- ./config/publish-doxygen.sh
 
 notifications:
   email: false
