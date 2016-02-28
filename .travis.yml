@@ -157,7 +157,7 @@ script:
 - cd -
 
 after_success:
-- ./config/publish-doxygen.sh
+- sudo bash config/publish-doxygen.sh
 
 notifications:
   email: false
