@@ -151,6 +151,7 @@ script:
 - cd -
 
 deploy:
+  skip_cleanup: true
   provider: script
   script: ./config/publish-doxygen
   on:
