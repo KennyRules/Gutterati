@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
-sudo openssl aes-256-cbc -K $encrypted_591a2533bcd2_key -iv $encrypted_591a2533bcd2_iv -in config/travisci_rsa.enc -out config/travisci_rsa -d
-sudo chmod 0600 config/travisci_rsa
+openssl aes-256-cbc -K $encrypted_591a2533bcd2_key -iv $encrypted_591a2533bcd2_iv -in config/travisci_rsa.enc -out config/travisci_rsa -d
+chmod 0600 config/travisci_rsa
+ssh-add config/travisci_rsa
 sudo cp config/travisci_rsa ~/.ssh/id_rsa
 
 REPO_PATH=git@github.com:KennyRules/Gutterati.git
@@ -12,6 +13,7 @@ CHANGESET=$(git rev-parse --verify HEAD)
 
 rm -rf ${HTML_PATH}
 mkdir -p ${HTML_PATH}
+git remote add gh-pages "${REPO_PATH}"
 git clone -b gh-pages "${REPO_PATH}" --single-branch ${HTML_PATH}
 
 cd ${HTML_PATH}
@@ -27,5 +29,5 @@ git add .
 git config user.name "${COMMIT_USER}"
 git config user.email "${COMMIT_EMAIL}"
 git commit -m "Automated documentation build for changeset ${CHANGESET}."
-git push origin gh-pages
+git push
 cd -

@@ -155,7 +155,7 @@ deploy:
   provider: script
   script: ./config/publish-doxygen
   on:
-    branch: master
+    branch: travis
 
 notifications:
   email: false
