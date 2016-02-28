@@ -156,7 +156,7 @@ after_success:
 - chmod 0600 config/travisci_rsa
 - cp config/travisci_rsa ~/.ssh/id_rsa
 - ls ~/.ssh/id_rsa
-- ./config/publish-doxygen.sh
+- ./config/publish-doxygen
 
 notifications:
   email: false
