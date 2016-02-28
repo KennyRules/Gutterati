@@ -1,4 +1,3 @@
-# REPO_PATH=https://github.com/KennyRules/Gutterati.git
 REPO_PATH=git@github.com:KennyRules/Gutterati.git
 HTML_PATH=build/doc/html
 COMMIT_USER="Documentation Builder"
