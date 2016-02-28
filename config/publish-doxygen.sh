@@ -1,6 +1,6 @@
 REPO_PATH=https://github.com/KennyRules/Gutterati.git
 HTML_PATH=build/doc/html
-COMMIT_USER="KennyRules"
+COMMIT_USER="Documentation Builder"
 COMMIT_EMAIL="drewd@code-phoenix.com"
 CHANGESET=$(git rev-parse --verify HEAD)
 
@@ -21,5 +21,5 @@ git add .
 git config user.name "${COMMIT_USER}"
 git config user.email "${COMMIT_EMAIL}"
 git commit -m "Automated documentation build for changeset ${CHANGESET}."
-git push --force origin gh-pages
+git push origin gh-pages
 cd -
