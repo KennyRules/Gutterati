@@ -153,16 +153,16 @@ script:
 
 after_success:
   - python travis_after_all.py https://api.travis-ci.com
-    - export $(cat .to_export_back)
-    - |
-        if [ "$BUILD_LEADER" = "YES" ]; then
-          if [ "$BUILD_AGGREGATE_STATUS" = "others_succeeded" ]; then
-            echo "All jobs succeeded! PUBLISHING..."
-            ./config/publish-doxygen
-          else
-            echo "Some jobs failed"
-          fi
+  - export $(cat .to_export_back)
+  - |
+      if [ "$BUILD_LEADER" = "YES" ]; then
+        if [ "$BUILD_AGGREGATE_STATUS" = "others_succeeded" ]; then
+          echo "All jobs succeeded! PUBLISHING..."
+          ./config/publish-doxygen
+        else
+          echo "Some jobs failed"
         fi
+      fi
 
 after_failure:
   - python travis_after_all.py https://api.travis-ci.com
