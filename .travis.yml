@@ -145,17 +145,39 @@ before_script:
 - cmake . -Bbuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
 
 script:
+- curl -Lo travis_after_all.py https://raw.github.com/dmakhno/travis_after_all/master/travis_after_all.py
 - cd build
 - make -j 2
 - ctest -V -j 2
 - cd -
 
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: ./config/publish-doxygen
-  on:
-    branch: travis
+after_success:
+  - python travis_after_all.py https://api.travis-ci.com
+    - export $(cat .to_export_back)
+    - |
+        if [ "$BUILD_LEADER" = "YES" ]; then
+          if [ "$BUILD_AGGREGATE_STATUS" = "others_succeeded" ]; then
+            echo "All jobs succeeded! PUBLISHING..."
+            ./config/publish-doxygen
+          else
+            echo "Some jobs failed"
+          fi
+        fi
+
+after_failure:
+  - python travis_after_all.py https://api.travis-ci.com
+  - export $(cat .to_export_back)
+  - |
+      if [ "$BUILD_LEADER" = "YES" ]; then
+        if [ "$BUILD_AGGREGATE_STATUS" = "others_failed" ]; then
+          echo "All jobs failed"
+        else
+          echo "Some jobs failed"
+        fi
+      fi
+
+after_script:
+  - echo leader=$BUILD_LEADER status=$BUILD_AGGREGATE_STATUS
 
 notifications:
   email: false
