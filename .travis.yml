@@ -152,6 +152,10 @@ script:
 - cd -
 
 after_success:
+  - openssl aes-256-cbc -K $encrypted_591a2533bcd2_key -iv $encrypted_591a2533bcd2_iv -in config/travisci_rsa.enc -out config/travisci_rsa -d
+  - chmod 0600 config/travisci_rsa
+  - sudo cp config/travisci_rsa ~/.ssh/id_rsa
+  - export GITHUB_TOKEN=$(cat config/travisci_rsa)
   - python travis_after_all.py https://api.travis-ci.com
   - export $(cat .to_export_back)
   - |
@@ -165,6 +169,10 @@ after_success:
       fi
 
 after_failure:
+  - openssl aes-256-cbc -K $encrypted_591a2533bcd2_key -iv $encrypted_591a2533bcd2_iv -in config/travisci_rsa.enc -out config/travisci_rsa -d
+  - chmod 0600 config/travisci_rsa
+  - sudo cp config/travisci_rsa ~/.ssh/id_rsa
+  - export GITHUB_TOKEN=$(cat config/travisci_rsa)
   - python travis_after_all.py https://api.travis-ci.com
   - export $(cat .to_export_back)
   - |
